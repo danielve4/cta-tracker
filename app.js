@@ -1,6 +1,6 @@
 var express = require('express');
 var https = require('https');
-var weather = require('./controllers/weather.js');
+var cta = require('./controllers/cta.js');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -13,7 +13,7 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname+'/views/index.html');
 });
 
-app.use('/weather', weather);
+app.use('/cta', cta);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
