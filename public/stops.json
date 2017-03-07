@@ -1,0 +1,1008 @@
+[
+  {
+    "routeNumber": "1",
+    "routeName": "Bronzeville/Union Station",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "2",
+    "routeName": "Hyde Park Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "3",
+    "routeName": "King Drive",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "4",
+    "routeName": "Cottage Grove",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "5",
+    "routeName": "South Shore Night Bus",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "6",
+    "routeName": "Jackson Park Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "7",
+    "routeName": "Harrison",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "8",
+    "routeName": "Halsted",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "8A",
+    "routeName": "South Halsted",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "9",
+    "routeName": "Ashland",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "X9",
+    "routeName": "Ashland Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "11",
+    "routeName": "Lincoln",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "12",
+    "routeName": "Roosevelt",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "J14",
+    "routeName": "Jeffery Jump",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "15",
+    "routeName": "Jeffery Local",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "18",
+    "routeName": "16th/18th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "19",
+    "routeName": "United Center Express",
+    "directions": [
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "20",
+    "routeName": "Madison",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "21",
+    "routeName": "Cermak",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "22",
+    "routeName": "Clark",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "24",
+    "routeName": "Wentworth",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "26",
+    "routeName": "South Shore Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "28",
+    "routeName": "Stony Island",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "29",
+    "routeName": "State",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "30",
+    "routeName": "South Chicago",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "31",
+    "routeName": "31st",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "34",
+    "routeName": "South Michigan",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "35",
+    "routeName": "31st/35th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "36",
+    "routeName": "Broadway",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "37",
+    "routeName": "Sedgwick",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "39",
+    "routeName": "Pershing",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "43",
+    "routeName": "43rd",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "44",
+    "routeName": "Wallace-Racine",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "47",
+    "routeName": "47th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "48",
+    "routeName": "South Damen",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "49",
+    "routeName": "Western",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "49B",
+    "routeName": "North Western",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "X49",
+    "routeName": "Western Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "50",
+    "routeName": "Damen",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "51",
+    "routeName": "51st",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "52",
+    "routeName": "Kedzie/California",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "52A",
+    "routeName": "South Kedzie",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "53",
+    "routeName": "Pulaski",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "53A",
+    "routeName": "South Pulaski",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "54",
+    "routeName": "Cicero",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "54A",
+    "routeName": "North Cicero/Skokie Blvd.",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "54B",
+    "routeName": "South Cicero",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "55",
+    "routeName": "Garfield",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "55A",
+    "routeName": "55th/Austin",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "55N",
+    "routeName": "55th/Narragansett",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "56",
+    "routeName": "Milwaukee",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "57",
+    "routeName": "Laramie",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "59",
+    "routeName": "59th/61st",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "60",
+    "routeName": "Blue Island/26th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "62",
+    "routeName": "Archer",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "62H",
+    "routeName": "Archer/Harlem",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "63",
+    "routeName": "63rd",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "63W",
+    "routeName": "West 63rd",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "65",
+    "routeName": "Grand",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "66",
+    "routeName": "Chicago",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "67",
+    "routeName": "67th-69th-71st",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "68",
+    "routeName": "Northwest Highway",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "70",
+    "routeName": "Division",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "71",
+    "routeName": "71st/South Shore",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "72",
+    "routeName": "North",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "73",
+    "routeName": "Armitage",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "74",
+    "routeName": "Fullerton",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "75",
+    "routeName": "74th-75th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "76",
+    "routeName": "Diversey",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "77",
+    "routeName": "Belmont",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "78",
+    "routeName": "Montrose",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "79",
+    "routeName": "79th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "80",
+    "routeName": "Irving Park",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "81",
+    "routeName": "Lawrence",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "81W",
+    "routeName": "West Lawrence",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "82",
+    "routeName": "Kimball-Homan",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "84",
+    "routeName": "Peterson",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "85",
+    "routeName": "Central",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "85A",
+    "routeName": "North Central",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "86",
+    "routeName": "Narragansett/Ridgeland",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "87",
+    "routeName": "87th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "88",
+    "routeName": "Higgins",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "90",
+    "routeName": "Harlem",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "91",
+    "routeName": "Austin",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "92",
+    "routeName": "Foster",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "93",
+    "routeName": "California/Dodge",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "94",
+    "routeName": "South California",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "95",
+    "routeName": "95th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "96",
+    "routeName": "Lunt",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "97",
+    "routeName": "Skokie",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "X98",
+    "routeName": "Avon Express",
+    "directions": [
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "100",
+    "routeName": "Jeffery Manor Express",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "103",
+    "routeName": "West 103rd",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "106",
+    "routeName": "East 103rd",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "108",
+    "routeName": "Halsted/95th",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "111",
+    "routeName": "111th/King Drive",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "111A",
+    "routeName": "Pullman Shuttle",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "112",
+    "routeName": "Vincennes/111th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "115",
+    "routeName": "Pullman/115th",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "119",
+    "routeName": "Michigan/119th",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "120",
+    "routeName": "Ogilvie/Streeterville Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "121",
+    "routeName": "Union/Streeterville Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "124",
+    "routeName": "Navy Pier",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "125",
+    "routeName": "Water Tower Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "126",
+    "routeName": "Jackson",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "132",
+    "routeName": "Goose Island Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "134",
+    "routeName": "Stockton/LaSalle Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "135",
+    "routeName": "Clarendon/LaSalle Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "136",
+    "routeName": "Sheridan/LaSalle Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "143",
+    "routeName": "Stockton/Michigan Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "146",
+    "routeName": "Inner Drive/Michigan Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "147",
+    "routeName": "Outer Drive Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "148",
+    "routeName": "Clarendon/Michigan Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "151",
+    "routeName": "Sheridan",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "152",
+    "routeName": "Addison",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "155",
+    "routeName": "Devon",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "156",
+    "routeName": "LaSalle",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "157",
+    "routeName": "Streeterville/Taylor",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "165",
+    "routeName": "West 65th",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "169",
+    "routeName": "69th-UPS Express",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "171",
+    "routeName": "U. of Chicago/Hyde Park",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "172",
+    "routeName": "U. of Chicago/Kenwood",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "192",
+    "routeName": "U. of Chicago Hospitals Express",
+    "directions": [
+      "Northbound",
+      "Southbound"
+    ]
+  },
+  {
+    "routeNumber": "201",
+    "routeName": "Central/Ridge",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "205",
+    "routeName": "Chicago/Golf",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  },
+  {
+    "routeNumber": "206",
+    "routeName": "Evanston Circulator",
+    "directions": [
+      "Eastbound",
+      "Westbound"
+    ]
+  }
+]
