@@ -30,6 +30,10 @@ a {
   color: #3949AB;
 }
 
+.hidden {
+  display: none;
+}
+
 #page {
   padding: 0.611111111em; /*half gridline*/
 }
