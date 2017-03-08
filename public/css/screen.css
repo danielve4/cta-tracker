@@ -15,7 +15,7 @@ html {
   line-height: 1.222em;   /*22px is 1 gridline at 18px | 22px / 18px = 1.222em*/
   background-color: #EDEDED;
   color: #212121;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Roboto","Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -35,7 +35,7 @@ a {
 }
 
 nav {
-  position: fixed; /*The navbar stays at the top of the page, not visible after scrolling*/
+  position: absolute; /*The navbar stays at the top of the page, not visible after scrolling*/
   width: 100%;
   top: 0;
   left: 0;
@@ -53,16 +53,20 @@ nav {
   display: block;
   text-align: center;
   line-height: 1em;
-  background-color: #0079C2;
   padding: 1.2777778em 0.333em 1.1666667em 0.333em; /* 23px 6px 21px 6px @ 18px/em | 21px to leave room for the white line underneath the links*/
   border-bottom: 0.11111111em transparent; /*Transparent bar to activate when selected | 2px / 18px = 0.1111em*/
   color: #EDEDED;
 }
 
+#routes,
+#route-directions {
+  margin-top: 64px;
+}
+
 #routes li a,
 #route-directions li a {
   padding-bottom: 0.833333333em; /*15px*/
-  padding-top: 0.833333333em; /*Half gridline*/
+  padding-top: 0.833333333em; /*15px*/
   /*border-bottom: 0.1em solid #e0e0e0;*/
 }
 
