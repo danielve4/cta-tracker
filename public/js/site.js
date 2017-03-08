@@ -1,7 +1,7 @@
 $.noConflict();
 jQuery(function($) {
   $(document).ready(function() {
-    var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops';
+    var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops',ARRIVALS='arrivals';
     var storageItem = 'favorites'; //Name of item in localStorage
     var favorites;
     var routes;
@@ -28,6 +28,10 @@ jQuery(function($) {
           listRouteDirections(context.rt);
         } else if(context.hasOwnProperty('rt') && context.hasOwnProperty('#dir')) {
           setScreenTo(STOPS);
+          getRouteStops(context.rt,context['#dir']);
+        } else if(context.hasOwnProperty('stop-id')) {
+          setScreenTo(ARRIVALS);
+          getPredictions(context['stop-id'])
         }
       }
     }
@@ -65,11 +69,59 @@ jQuery(function($) {
       }
     }
 
+    function getRouteStops(route, direction) {
+      $('#stops').empty();
+      $.when($.ajax({
+        type: 'GET',
+        url: '/cta/'+route+','+direction
+      })).then(function(data) {
+        listRouteStops(data);
+      }, function () {
+        console.log('Error');
+      });
+    }
+
+    function listRouteStops(stops) {
+      for(var m=0;m<stops.length;m++) {
+        $('#stops').append(
+          '<li><a href="#stop-id='+stops[m].stpid+'">'
+          +stops[m].stpnm+
+          '</a></li>'
+        );
+      }
+    }
+
+    function getPredictions(stopId) {
+      $('#arrivals').empty();
+      $.when($.ajax({
+        type: 'GET',
+        url: '/cta/'+stopId
+      })).then(function(data) {
+        listPredictions(data);
+      }, function () {
+        console.log('Error');
+      });
+    }
+
+    function listPredictions(predictions) {
+      console.log(predictions);
+      for(var n=0;n<predictions.prd.length;n++) {
+        $('#arrivals').append(
+          '<li>'+
+          '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
+          '<span class="destination">To '+predictions.prd[n].des+'</span>'+
+          '<span class="arrival-time">'+predictions.prd[n].prdctdn+'m</span>'+
+          '</li>'
+        );
+      }
+    }
+
     function setScreenTo(type) {
       $('#favorites').addClass('hidden');
       $('#routes').addClass('hidden');
       $('#route-directions').addClass('hidden');
       $('#stops').addClass('hidden');
+      $('#arrivals').addClass('hidden');
       switch(type) {
         case FAV:
           $('#favorites').removeClass('hidden');
@@ -83,6 +135,9 @@ jQuery(function($) {
         case STOPS:
           $('#stops').removeClass('hidden');
           console.log('Stops');
+          break;
+        case ARRIVALS:
+          $('#arrivals').removeClass('hidden');
           break;
         default:
           console.log('Invalid Screen Type');
