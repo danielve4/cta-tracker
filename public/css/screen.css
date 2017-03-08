@@ -57,6 +57,7 @@ nav {
   padding: 1.2777778em 0.333em 1.1666667em 0.333em; /* 23px 6px 21px 6px @ 18px/em | 21px to leave room for the white line underneath the links*/
   border-bottom: 0.11111111em transparent; /*Transparent bar to activate when selected | 2px / 18px = 0.1111em*/
   color: #EDEDED;
+  font-weight: normal;
 }
 
 .active a {
@@ -69,15 +70,25 @@ nav {
 #route-directions,
 #stops,
 #arrivals {
-  margin-top: 64px;
+  margin-top: 3.55555555556em;
 }
 
 #routes li a,
 #route-directions li a,
 #stops li a,
 #arrivals li {
-  padding-bottom: 0.833333333em; /*15px*/
-  padding-top: 0.833333333em; /*15px*/
+  padding-bottom: 0.72222222em; /*13px*/
+  padding-top: 0.72222222em; /*13px*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-subheader {
+  font-size: 0.777777778em; /*14px/18px = 0.777777778em*/
+  line-height: 3.428571429em; /*48px / 14px = 3.428571429em*/
+  height: 3.428571429em; /*48px / 14px = 3.428571429em*/
+  color: #9e9e9e;
 }
 
 /*#routes li:last-child,*/
