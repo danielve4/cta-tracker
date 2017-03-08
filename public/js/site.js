@@ -79,27 +79,6 @@ jQuery(function($) {
       return values;
     }
 
-    function searchRoute(number) {
-      var low = 0;
-      var high = routes.length - 1;
-      var mid;
-      var tempR;
-      while (low <= high) {
-        mid = Math.floor((low + high) / 2);
-        console.log('mid is: ' + mid + '. Comparing: ' + routes[mid].routeNumber +' and '+ number);
-        tempR = routes[mid].routeNumber;
-        if (tempR.toString().localeCompare(number.toString(),undefined, {numeric: true, sensitivity: 'base'}) < 0) {
-          low = mid + 1;
-        } else if (tempR.toString().localeCompare(number.toString(),undefined, {numeric: true, sensitivity: 'base'}) > 0) {
-          high = mid - 1;
-        } else {
-          console.log('returning: '+ mid);
-          return mid;
-        }
-      }
-      return -1;
-    }
-
     $(window).on('hashchange', function() {
       console.log(parseHash(location.hash));
       decideScreen();
