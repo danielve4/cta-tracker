@@ -13,7 +13,7 @@ http://www.modularscale.com/?22&px&1.125&web&text
 html {
   font-size: 1.125em;     /*18px / 16px = 1.125em*/
   line-height: 1.222em;   /*22px is 1 gridline at 18px | 22px / 18px = 1.222em*/
-  background-color: #37474F;
+  background-color: #303030;
   color: #EDEDED;
   font-family: "Roboto","Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -41,7 +41,7 @@ nav {
   top: 0;
   left: 0;
   box-shadow: 0 0.11111em 0.27778em rgba(0,0,0,0.26); /*The shadow of the navigation bar 4px down, 8px blur radius*/
-  background: #263238;
+  background: #212121;
   height: 3.55555em; /* height of the navigation box 64px/18px = 3.555em | 64 = 23+18+23*/
 }
 
