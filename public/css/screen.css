@@ -13,10 +13,10 @@ http://www.modularscale.com/?22&px&1.125&web&text
 html {
   font-size: 1.125em;     /*18px / 16px = 1.125em*/
   line-height: 1.222em;   /*22px is 1 gridline at 18px | 22px / 18px = 1.222em*/
-  background-color: #EDEDED;
-  color: #001A26;
+  background-color: #001A26;
+  color: #EDEDED;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 h1 {
@@ -26,12 +26,28 @@ h1 {
 }
 
 a {
+  padding-bottom: 0.6111111em; /*Half gridline*/
+  padding-top: 0.6111111em; /*Half gridline*/
   text-decoration: none;
-  color: #3949AB;
+  display: block;
+  color: #EDEDED;
 }
 
 .hidden {
   display: none;
+}
+
+li {
+  border-bottom: 0.1em solid #e0e0e0;;
+}
+
+li:last-child {
+  border-bottom: 0;
+}
+
+.route-number {
+  display: inline-block;
+  width: 2.5em;
 }
 
 #page {
