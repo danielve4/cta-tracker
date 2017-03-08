@@ -75,13 +75,17 @@ nav {
 
 #routes li a,
 #route-directions li a,
-#stops li a,
-#arrivals li {
+#stops li a {
   padding-bottom: 0.72222222em; /*13px*/
   padding-top: 0.72222222em; /*13px*/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#arrivals li {
+  padding-bottom: 1.38888889em; /*25px*/
+  padding-top: 1.38888889em; /*25px*/
 }
 
 .list-subheader {
@@ -103,7 +107,7 @@ nav {
 }
 
 .arrival-time {
-  font-size: 2.222222em;
+  font-size: 1.802055556em;
   float: right;
 }
 
