@@ -1,7 +1,7 @@
 $.noConflict();
 jQuery(function($) {
   $(document).ready(function() {
-    var HOME='home',DIRECT='directions',ARRIVALS='arrivals';
+    var FAV='fav',ROUTES='routes',DIRECT='directions',ARRIVALS='arrivals';
     var routes;
     $.getJSON('stops.json', function(json) {
       routes = json;
@@ -11,11 +11,15 @@ jQuery(function($) {
 
     function decideScreen() {
       if(!location.hash) {
-        listRoutes();
-        setScreenTo(HOME);
+        setScreenTo(FAV);
       } else {
         var context = parseHash(location.hash);
-        if(context.hasOwnProperty('rt')) {
+        if(context.hasOwnProperty('favorites')) {
+          setScreenTo(FAV);
+        } else  if(context.hasOwnProperty('routes')) {
+          setScreenTo(ROUTES);
+          listRoutes();
+        } if(context.hasOwnProperty('rt')) {
           console.log('rt is:' + context.rt);
           listRouteDirections(context.rt);
         }
@@ -24,12 +28,16 @@ jQuery(function($) {
 
     function listRoutes() {
       $('#routes').empty();
+      var route;
       for(var i=0; i<routes.routes.length; i++) {
+        route = routes.routes[i];
         $('#routes').append(
           '<li>' +
-          '<a href="#rt='+routes.routes[i].routeNumber+'" class="route-number" id="'+routes.routes[i].routeNumber+'">'
-          +routes.routes[i].routeNumber+ ' ' +routes.routes[i].routeName+
-          '</a></li>'
+            '<a href="#rt='+route.routeNumber+'"id="'+route.routeNumber+'">' +
+              '<span class="route-number">'+route.routeNumber+ '</span> ' +
+              '<span class="route-name">' +route.routeName+ '</span>' +
+            '</a>' +
+          '</li>'
         );
       }
     }
@@ -53,13 +61,17 @@ jQuery(function($) {
     }
 
     function setScreenTo(type) {
+      $('#favorites').addClass('hidden');
+      $('#routes').addClass('hidden');
+      $('#route-directions').addClass('hidden');
       switch(type) {
-        case HOME:
+        case FAV:
+          $('#favorites').removeClass('hidden');
+          break;
+        case ROUTES:
           $('#routes').removeClass('hidden');
-          $('#route-directions').addClass('hidden');
           break;
         case DIRECT:
-          $('#routes').addClass('hidden');
           $('#route-directions').removeClass('hidden');
           break;
         default:
@@ -76,11 +88,11 @@ jQuery(function($) {
         pair = params[k].split('=');
         values[pair[0]] = pair[1];
       }
+      console.log(values);
       return values;
     }
 
     $(window).on('hashchange', function() {
-      console.log(parseHash(location.hash));
       decideScreen();
     });
   });
