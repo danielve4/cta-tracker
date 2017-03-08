@@ -1,7 +1,7 @@
 $.noConflict();
 jQuery(function($) {
   $(document).ready(function() {
-    var FAV='fav',ROUTES='routes',DIRECT='directions',ARRIVALS='arrivals';
+    var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops';
     var storageItem = 'favorites'; //Name of item in localStorage
     var favorites;
     var routes;
@@ -22,9 +22,12 @@ jQuery(function($) {
         } else  if(context.hasOwnProperty('routes')) {
           setScreenTo(ROUTES);
           listRoutes();
-        } if(context.hasOwnProperty('rt')) {
+        } else if(context.hasOwnProperty('rt') && !context.hasOwnProperty('#dir')) {
+          setScreenTo(DIRECT);
           console.log('rt is:' + context.rt);
           listRouteDirections(context.rt);
+        } else if(context.hasOwnProperty('rt') && context.hasOwnProperty('#dir')) {
+          setScreenTo(STOPS);
         }
       }
     }
@@ -51,12 +54,11 @@ jQuery(function($) {
     });
 
     function listRouteDirections(rNumber) {
-      setScreenTo(DIRECT);
       var route = routes[rNumber];
       $('#route-directions').empty();
       for(var j=0;j<route.directions.length;j++) {
         $('#route-directions').append(
-          '<li><a href="#rt='+route.routeNumber+'&#dir='+route.directions[j]+'">'
+          '<li><a href="#rt='+rNumber+'&#dir='+route.directions[j]+'">'
           +route.directions[j]+
           '</a></li>'
         );
@@ -67,6 +69,7 @@ jQuery(function($) {
       $('#favorites').addClass('hidden');
       $('#routes').addClass('hidden');
       $('#route-directions').addClass('hidden');
+      $('#stops').addClass('hidden');
       switch(type) {
         case FAV:
           $('#favorites').removeClass('hidden');
@@ -76,6 +79,10 @@ jQuery(function($) {
           break;
         case DIRECT:
           $('#route-directions').removeClass('hidden');
+          break;
+        case STOPS:
+          $('#stops').removeClass('hidden');
+          console.log('Stops');
           break;
         default:
           console.log('Invalid Screen Type');
