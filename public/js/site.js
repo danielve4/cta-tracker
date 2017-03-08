@@ -60,6 +60,7 @@ jQuery(function($) {
     function listRouteDirections(rNumber) {
       var route = routes[rNumber];
       $('#route-directions').empty();
+      $('#route-directions').append('<li class="list-subheader">Choose a direction</li>');
       for(var j=0;j<route.directions.length;j++) {
         $('#route-directions').append(
           '<li><a href="#rt='+rNumber+'&#dir='+route.directions[j]+'">'
@@ -82,6 +83,7 @@ jQuery(function($) {
     }
 
     function listRouteStops(stops) {
+      $('#stops').append('<li class="list-subheader">Choose a stop</li>');
       for(var m=0;m<stops.length;m++) {
         $('#stops').append(
           '<li><a href="#stop-id='+stops[m].stpid+'">'
