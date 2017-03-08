@@ -2,6 +2,8 @@ $.noConflict();
 jQuery(function($) {
   $(document).ready(function() {
     var FAV='fav',ROUTES='routes',DIRECT='directions',ARRIVALS='arrivals';
+    var storageItem = 'favorites'; //Name of item in localStorage
+    var favorites;
     var routes;
     $.getJSON('stops.json', function(json) {
       routes = json;
@@ -16,6 +18,7 @@ jQuery(function($) {
         var context = parseHash(location.hash);
         if(context.hasOwnProperty('favorites')) {
           setScreenTo(FAV);
+          loadFavorites();
         } else  if(context.hasOwnProperty('routes')) {
           setScreenTo(ROUTES);
           listRoutes();
@@ -90,6 +93,36 @@ jQuery(function($) {
       }
       console.log(values);
       return values;
+    }
+
+    function loadFavorites() {
+      var favoritesJSON;
+      favorites = localStorage.getItem(storageItem);
+      try {
+        favoritesJSON = JSON.parse(favorites);
+        if (favoritesJSON && typeof favoritesJSON === "object") {
+          favorites =  favoritesJSON;
+        }
+      }
+      catch (e) {}
+      favoritesJSON = {
+        'favorites': []
+      };
+      favorites =  favoritesJSON;
+    }
+
+    function addToFavorites(location) {
+      loadFavorites();
+      var exists=false; //Check if favorite already exist in favorite list
+      for(var u=0;u<favorites.favorites.length;u++) {
+        if(location===favorites.favorites[u]) {
+          exists=true;
+        }
+      }
+      if(!exists) { //Favorite does not exist
+        favorites.favorites.push(location);
+        localStorage.setItem(storageItem, JSON.stringify(favorites));
+      }
     }
 
     $(window).on('hashchange', function() {
