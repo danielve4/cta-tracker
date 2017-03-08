@@ -59,15 +59,18 @@ nav {
 }
 
 #routes,
-#route-directions {
+#route-directions,
+#stops,
+#arrivals {
   margin-top: 64px;
 }
 
 #routes li a,
-#route-directions li a {
+#route-directions li a,
+#stops li a,
+#arrivals li {
   padding-bottom: 0.833333333em; /*15px*/
   padding-top: 0.833333333em; /*15px*/
-  /*border-bottom: 0.1em solid #e0e0e0;*/
 }
 
 /*#routes li:last-child,*/
@@ -78,6 +81,11 @@ nav {
 .route-number {
   display: inline-block;
   width: 2.5em;
+}
+
+.arrival-time {
+  font-size: 2.222222em;
+  float: right;
 }
 
 #page {
