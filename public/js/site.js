@@ -125,9 +125,13 @@ jQuery(function($) {
       switch(type) {
         case FAV:
           $('#favorites').removeClass('hidden');
+          $('#favorites-nav').addClass('active');
+          $('#routes-nav').removeClass('active');
           break;
         case ROUTES:
           $('#routes').removeClass('hidden');
+          $('#routes-nav').addClass('active');
+          $('#favorites-nav').removeClass('active');
           break;
         case DIRECT:
           $('#route-directions').removeClass('hidden');
