@@ -3,7 +3,7 @@ jQuery(function($) {
   $(document).ready(function() {
     var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops',ARRIVALS='arrivals';
     var storageItem = 'favorites'; //Name of item in localStorage
-    var favorites;
+    var favorites = [];
     var routes;
     $.getJSON('stops.json', function(json) {
       routes = json;
@@ -14,6 +14,7 @@ jQuery(function($) {
     function decideScreen() {
       if(!location.hash) {
         setScreenTo(FAV);
+        listFavorites();
       } else {
         var context = parseHash(location.hash);
         if(context.hasOwnProperty('favorites')) {
@@ -132,7 +133,7 @@ jQuery(function($) {
     
     $('#favorite-button').on('click', function (e) {
       console.log('Favorite');
-      addToFavorites();
+      toggleFavorite();
     });
 
     function listFavorites() {
@@ -174,61 +175,65 @@ jQuery(function($) {
           'favorites': []
         };
       }
-      console.log(favoritesJSON);
       favorites =  favoritesJSON;
     }
 
+    function toggleFavorite() {
+      if($('#favorite-button').hasClass('fill')) {
+        deleteFavorite();
+      } else if($('#favorite-button').hasClass('no-fill')) {
+        addToFavorites();
+      }
+    }
+
     function addToFavorites() {
-      var url = parseHash(location.hash);
-      if(url.hasOwnProperty('rt') &&
-        url.hasOwnProperty('rt-name') &&
-        url.hasOwnProperty('dir') &&
-        url.hasOwnProperty('stop-id')) {
-        loadFavorites();
-        var exists=false; //Check if favorite already exist in favorite list
-        for(var u=0;u<favorites.favorites.length;u++) {
-          if(url['dir']===favorites.favorites[u].direction &&
-            url['rt-name'].replace(/%20/g, ' ')===favorites.favorites[u].routeName) {
-            exists=true;
-          }
-        }
-        if(!exists) { //Favorite does not exist
-          var newFavorite = {
-            'routeNumber':url['rt'],
-            'direction': url['dir'],
-            'routeName':url['rt-name'].replace(/%20/g, ' '),
-            'stopId':url['stop-id']
-          };
-          favorites.favorites.push(newFavorite);
-          localStorage.setItem(storageItem, JSON.stringify(favorites));
-          $('#favorite-button').removeClass('no-fill');
-          $('#favorite-button').addClass('fill');
-        }
+      var exists = isFavorite();
+      if(exists <= 0) { //Favorite does not exist
+        var url = parseHash(location.hash);
+        var newFavorite = {
+          'routeNumber':url['rt'],
+          'direction': url['dir'],
+          'routeName':url['rt-name'].replace(/%20/g, ' '),
+          'stopId':url['stop-id']
+        };
+        favorites.favorites.push(newFavorite);
+        localStorage.setItem(storageItem, JSON.stringify(favorites));
+        $('#favorite-button').removeClass('no-fill');
+        $('#favorite-button').addClass('fill');
+      }
+    }
+    
+    function deleteFavorite() {
+      var index = isFavorite();
+      if(index >= 0) {
+        favorites.favorites.splice(index, 1);
+        localStorage.setItem(storageItem, JSON.stringify(favorites));
+        $('#favorite-button').removeClass('fill');
+        $('#favorite-button').addClass('no-fill');
       }
     }
     
     function checkFavorite() {
+      var exists = isFavorite();
+      if(exists >= 0) {
+        $('#favorite-button').removeClass('no-fill');
+        $('#favorite-button').addClass('fill');
+      } else {
+        $('#favorite-button').removeClass('fill');
+        $('#favorite-button').addClass('no-fill');
+      }
+    }
+
+    function isFavorite() {
       var url = parseHash(location.hash);
-      if(url.hasOwnProperty('rt') &&
-        url.hasOwnProperty('rt-name') &&
-        url.hasOwnProperty('dir') &&
-        url.hasOwnProperty('stop-id')) {
-        loadFavorites();
-        var exists = false; //Check if favorite already exist in favorite list
-        for (var u = 0; u < favorites.favorites.length; u++) {
-          if (url['dir'] === favorites.favorites[u].direction &&
-            url['rt-name'].replace(/%20/g, ' ') === favorites.favorites[u].routeName) {
-            exists = true;
-          }
-        }
-        if(exists) {
-          $('#favorite-button').removeClass('no-fill');
-          $('#favorite-button').addClass('fill');
-        } else {
-          $('#favorite-button').removeClass('fill');
-          $('#favorite-button').addClass('no-fill');
+      loadFavorites();
+      for (var u = 0; u < favorites.favorites.length; u++) {
+        if (url['dir'] === favorites.favorites[u].direction &&
+          url['rt-name'].replace(/%20/g, ' ') === favorites.favorites[u].routeName) {
+          return u;
         }
       }
+      return -1;
     }
 
     function setScreenTo(type) {
