@@ -37,6 +37,7 @@ jQuery(function($) {
                   context.hasOwnProperty('stop-id')) {
           setScreenTo(ARRIVALS);
           getPredictions(context['rt-name'].replace(/%20/g, ' '),context['dir'],context['stop-id']);
+          checkFavorite();
         }
       }
     }
@@ -200,6 +201,32 @@ jQuery(function($) {
           };
           favorites.favorites.push(newFavorite);
           localStorage.setItem(storageItem, JSON.stringify(favorites));
+          $('#favorite-button').removeClass('no-fill');
+          $('#favorite-button').addClass('fill');
+        }
+      }
+    }
+    
+    function checkFavorite() {
+      var url = parseHash(location.hash);
+      if(url.hasOwnProperty('rt') &&
+        url.hasOwnProperty('rt-name') &&
+        url.hasOwnProperty('dir') &&
+        url.hasOwnProperty('stop-id')) {
+        loadFavorites();
+        var exists = false; //Check if favorite already exist in favorite list
+        for (var u = 0; u < favorites.favorites.length; u++) {
+          if (url['dir'] === favorites.favorites[u].direction &&
+            url['rt-name'].replace(/%20/g, ' ') === favorites.favorites[u].routeName) {
+            exists = true;
+          }
+        }
+        if(exists) {
+          $('#favorite-button').removeClass('no-fill');
+          $('#favorite-button').addClass('fill');
+        } else {
+          $('#favorite-button').removeClass('fill');
+          $('#favorite-button').addClass('no-fill');
         }
       }
     }
