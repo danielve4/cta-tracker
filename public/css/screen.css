@@ -14,8 +14,8 @@ html {
   font-size: 1.125em;     /*18px / 16px = 1.125em*/
   line-height: 1.222em;   /*22px is 1 gridline at 18px | 22px / 18px = 1.222em*/
   background-color: #303030;
-  color: #EDEDED;
-  font-family: "Roboto","Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #FFFFFF;
+  font-family: Roboto,"Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -42,15 +42,47 @@ nav {
   left: 0;
   box-shadow: 0 0.11111em 0.27778em rgba(0,0,0,0.26); /*The shadow of the navigation bar 4px down, 8px blur radius*/
   background: #212121;
-  height: 2.66666667em; /* height of the navigation box 48px/18px = 2.66666667em*/
+  height: 5.77777777778em; /* height of the navigation (56+48=104) 104px/18px = 5.77777777778em*/
 }
 
-.nav li {
+.app-bar {
+  height: 3.11111111em; /*56px/18px = 3.11111111em*/
+}
+
+#app-bar-title {
+  font-size: 1.111111em; /*20px/18px = 1.111111em*/
+  line-height: 1.2em; /*24px/20px = 1.2em*/
+  padding-bottom: 1em; /*20px*/
+  padding-top: 0.6em; /*12px*/
+  padding-left: 3.6em; /*72px*/
+  width: 50%;
+  display: inline-block;
+  font-weight: bold;
+
+}
+
+#app-bar-fav {
+  float: right;
+}
+
+#favorite-button {
+  font-family: inherit;
+  height: 50px;
+  width: 56px;
+  background: url("../icons/ic_favorite_border_black_24px.svg") no-repeat;
+  background-size: 24px;
+  background-position: 50%;
+  font-size: 100%;
+  padding: 0;
+  border: 0;
+}
+
+.toolbar li {
   float: left;
   width: 50%; /*2 links in nav bar = 1/2 of width of navbar per link*/
 }
 
-.nav a {
+.toolbar a {
   display: block;
   text-align: center;
   font-size: 0.7777777777em; /*14px/18px = 0.7777778em*/
@@ -63,7 +95,7 @@ nav {
 
 .active a {
   color: #fff;
-  font-weight: 600;
+  font-weight: bold;
   border-bottom: 0.1428571429em solid #fff; /*Activate the bottom border to white when selected | 2px / 14px = 0.1428571429em*/
 }
 
@@ -71,7 +103,7 @@ nav {
 #route-directions,
 #stops,
 #arrivals {
-  margin-top: 2.666666667em; /*48px/18px = 2.666666667em*/
+  margin-top: 5.7777777778em; /*104px/18px = 5.7777777778em*/
 }
 
 #routes li a,
