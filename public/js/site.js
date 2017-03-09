@@ -22,16 +22,15 @@ jQuery(function($) {
         } else  if(context.hasOwnProperty('routes')) {
           setScreenTo(ROUTES);
           listRoutes();
-        } else if(context.hasOwnProperty('rt') && !context.hasOwnProperty('#dir')) {
+        } else if(context.hasOwnProperty('rt') && !context.hasOwnProperty('dir')) {
           setScreenTo(DIRECT);
-          console.log('rt is:' + context.rt);
           listRouteDirections(context.rt);
-        } else if(context.hasOwnProperty('rt') && context.hasOwnProperty('#dir')) {
+        } else if(context.hasOwnProperty('rt') && context.hasOwnProperty('dir') && !context.hasOwnProperty('stop-id')) {
           setScreenTo(STOPS);
-          getRouteStops(context.rt,context['#dir']);
-        } else if(context.hasOwnProperty('stop-id')) {
+          getRouteStops(context.rt,context['dir']);
+        } else if(context.hasOwnProperty('rt-name') && context.hasOwnProperty('dir') && context.hasOwnProperty('stop-id')) {
           setScreenTo(ARRIVALS);
-          getPredictions(context['stop-id'])
+          getPredictions(context['rt-name'].replace(/%20/g, ' '),context['dir'],context['stop-id']);
         }
       }
     }
@@ -51,11 +50,6 @@ jQuery(function($) {
         );
       }
     }
-    
-    $('#routes').on('click','.route-number',function (e) {
-      console.log($(this).attr('id'));
-      listRouteDirections($(this).attr('id'));
-    });
 
     function listRouteDirections(rNumber) {
       var route = routes[rNumber];
@@ -63,7 +57,7 @@ jQuery(function($) {
       $('#route-directions').append('<li class="list-subheader">Route '+rNumber+' - Choose a direction</li>');
       for(var j=0;j<route.directions.length;j++) {
         $('#route-directions').append(
-          '<li><a href="#rt='+rNumber+'&#dir='+route.directions[j]+'">'
+          '<li><a href="#rt='+rNumber+'#dir='+route.directions[j]+'">'
           +route.directions[j]+
           '</a></li>'
         );
@@ -83,18 +77,21 @@ jQuery(function($) {
     }
 
     function listRouteStops(stops, route, direction) {
-      $('#stops').append('<li class="list-subheader">Route '+route+' - '+ direction+' -  Choose a stop</li>');
+      $('#stops').append(
+        '<li class="list-subheader">Route '+routes[route].routeName+' - '+ direction+' -  Choose a stop</li>'
+      );
       for(var m=0;m<stops.length;m++) {
         $('#stops').append(
-          '<li><a href="#stop-id='+stops[m].stpid+'">'
+          '<li><a href="#rt-name='+stops[m].stpnm+'#dir='+direction+'#stop-id='+stops[m].stpid+'">'
           +stops[m].stpnm+
           '</a></li>'
         );
       }
     }
 
-    function getPredictions(stopId) {
+    function getPredictions(routeName, direction, stopId) {
       $('#arrivals').empty();
+      $('#arrivals').append('<li class="list-subheader">Route '+routeName+' - '+ direction+'</li>');
       $.when($.ajax({
         type: 'GET',
         url: '/cta/'+stopId
@@ -107,15 +104,22 @@ jQuery(function($) {
 
     function listPredictions(predictions) {
       console.log(predictions);
-      for(var n=0;n<predictions.prd.length;n++) {
+      if(predictions.hasOwnProperty('prd')) {
+        for(var n=0;n<predictions.prd.length;n++) {
+          $('#arrivals').append(
+            '<li class="prediction">'+
+            '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
+            '<span class="destination">To '+predictions.prd[n].des+'</span>'+
+            '<span class="arrival-time">'+predictions.prd[n].prdctdn+'m</span>'+
+            '</li>'
+          );
+        }
+      } else if(predictions.hasOwnProperty('error')) {
         $('#arrivals').append(
-          '<li>'+
-          '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
-          '<span class="destination">To '+predictions.prd[n].des+'</span>'+
-          '<span class="arrival-time">'+predictions.prd[n].prdctdn+'m</span>'+
-          '</li>'
+          '<li class="prediction">'+predictions.error[0].msg+'</li>'
         );
       }
+
     }
 
     function setScreenTo(type) {
@@ -152,7 +156,7 @@ jQuery(function($) {
     }
 
     function parseHash(url) {
-      var params = (url.substr(1)).split('&');
+      var params = (url.substr(1)).split('#');
       var pair;
       var values = {};
       for(var k=0;k<params.length;k++){
