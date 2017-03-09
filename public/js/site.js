@@ -18,17 +18,23 @@ jQuery(function($) {
         var context = parseHash(location.hash);
         if(context.hasOwnProperty('favorites')) {
           setScreenTo(FAV);
-          loadFavorites();
+          listFavorites();
         } else  if(context.hasOwnProperty('routes')) {
           setScreenTo(ROUTES);
           listRoutes();
-        } else if(context.hasOwnProperty('rt') && !context.hasOwnProperty('dir')) {
+        } else if(context.hasOwnProperty('rt') &&
+                  !context.hasOwnProperty('dir')) {
           setScreenTo(DIRECT);
           listRouteDirections(context.rt);
-        } else if(context.hasOwnProperty('rt') && context.hasOwnProperty('dir') && !context.hasOwnProperty('stop-id')) {
+        } else if(context.hasOwnProperty('rt') &&
+                  context.hasOwnProperty('dir') &&
+                  !context.hasOwnProperty('stop-id')) {
           setScreenTo(STOPS);
           getRouteStops(context.rt,context['dir']);
-        } else if(context.hasOwnProperty('rt-name') && context.hasOwnProperty('dir') && context.hasOwnProperty('stop-id')) {
+        } else if(context.hasOwnProperty('rt') &&
+                  context.hasOwnProperty('rt-name') &&
+                  context.hasOwnProperty('dir') &&
+                  context.hasOwnProperty('stop-id')) {
           setScreenTo(ARRIVALS);
           getPredictions(context['rt-name'].replace(/%20/g, ' '),context['dir'],context['stop-id']);
         }
@@ -82,7 +88,7 @@ jQuery(function($) {
     function listRouteStops(stops, route, direction) {
       for(var m=0;m<stops.length;m++) {
         $('#stops').append(
-          '<li><a href="#rt-name='+stops[m].stpnm+'#dir='+direction+'#stop-id='+stops[m].stpid+'">'
+          '<li><a href="#rt='+route+'#rt-name='+stops[m].stpnm+'#dir='+direction+'#stop-id='+stops[m].stpid+'">'
           +stops[m].stpnm+
           '</a></li>'
         );
@@ -121,7 +127,81 @@ jQuery(function($) {
           '<li class="prediction">'+predictions.error[0].msg+'</li>'
         );
       }
+    }
+    
+    $('#favorite-button').on('click', function (e) {
+      console.log('Favorite');
+      addToFavorites();
+    });
 
+    function listFavorites() {
+      $('#favorites').empty();
+      loadFavorites();
+      var rNum, rName, direc,stopId;
+      for(var p=0;p<favorites.favorites.length;p++) {
+        rNum = favorites.favorites[p].routeNumber;
+        rName = favorites.favorites[p].routeName;
+        direc = favorites.favorites[p].direction;
+        stopId = favorites.favorites[p].stopId;
+        $('#favorites').append(
+          '<li>' +
+            '<a href="#rt='+rNum+'#rt-name='+rName+'#dir='+direc+'#stop-id='+stopId+'">' +
+              '<span class="route-number">'+rNum+'</span>'+
+              '<span class="route-direction">'+direc.charAt(0)+'</span>'+
+              '<span class="route-name">'+rName+'</span>'+
+            '</a>' +
+          '</li>'
+        );
+      }
+    }
+
+    function loadFavorites() {
+      var favoritesJSON;
+      favorites = localStorage.getItem(storageItem);
+      try {
+        favoritesJSON = JSON.parse(favorites);
+        if (favoritesJSON && typeof favoritesJSON === "object") {
+          favorites =  favoritesJSON;
+        } else {
+          favoritesJSON = {
+            'favorites': []
+          };
+        }
+      }
+      catch (e) {
+        favoritesJSON = {
+          'favorites': []
+        };
+      }
+      console.log(favoritesJSON);
+      favorites =  favoritesJSON;
+    }
+
+    function addToFavorites() {
+      var url = parseHash(location.hash);
+      if(url.hasOwnProperty('rt') &&
+        url.hasOwnProperty('rt-name') &&
+        url.hasOwnProperty('dir') &&
+        url.hasOwnProperty('stop-id')) {
+        loadFavorites();
+        var exists=false; //Check if favorite already exist in favorite list
+        for(var u=0;u<favorites.favorites.length;u++) {
+          if(url['dir']===favorites.favorites[u].direction &&
+            url['rt-name'].replace(/%20/g, ' ')===favorites.favorites[u].routeName) {
+            exists=true;
+          }
+        }
+        if(!exists) { //Favorite does not exist
+          var newFavorite = {
+            'routeNumber':url['rt'],
+            'direction': url['dir'],
+            'routeName':url['rt-name'].replace(/%20/g, ' '),
+            'stopId':url['stop-id']
+          };
+          favorites.favorites.push(newFavorite);
+          localStorage.setItem(storageItem, JSON.stringify(favorites));
+        }
+      }
     }
 
     function setScreenTo(type) {
@@ -130,6 +210,7 @@ jQuery(function($) {
       $('#route-directions').addClass('hidden');
       $('#stops').addClass('hidden');
       $('#arrivals').addClass('hidden');
+      $('#app-bar-fav').addClass('hidden');
       switch(type) {
         case FAV:
           $('#favorites').removeClass('hidden');
@@ -150,6 +231,7 @@ jQuery(function($) {
           break;
         case ARRIVALS:
           $('#arrivals').removeClass('hidden');
+          $('#app-bar-fav').removeClass('hidden');
           break;
         default:
           console.log('Invalid Screen Type');
@@ -167,36 +249,6 @@ jQuery(function($) {
       }
       console.log(values);
       return values;
-    }
-
-    function loadFavorites() {
-      var favoritesJSON;
-      favorites = localStorage.getItem(storageItem);
-      try {
-        favoritesJSON = JSON.parse(favorites);
-        if (favoritesJSON && typeof favoritesJSON === "object") {
-          favorites =  favoritesJSON;
-        }
-      }
-      catch (e) {}
-      favoritesJSON = {
-        'favorites': []
-      };
-      favorites =  favoritesJSON;
-    }
-
-    function addToFavorites(location) {
-      loadFavorites();
-      var exists=false; //Check if favorite already exist in favorite list
-      for(var u=0;u<favorites.favorites.length;u++) {
-        if(location===favorites.favorites[u]) {
-          exists=true;
-        }
-      }
-      if(!exists) { //Favorite does not exist
-        favorites.favorites.push(location);
-        localStorage.setItem(storageItem, JSON.stringify(favorites));
-      }
     }
 
     $(window).on('hashchange', function() {
