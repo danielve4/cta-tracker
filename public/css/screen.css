@@ -69,12 +69,21 @@ nav {
   font-family: inherit;
   height: 2.77777778em; /*50px/18px*/
   width: 3.1111111em; /*56/18px*/
-  background: url("../icons/ic_favorite_border_black_24px.svg") no-repeat;
   background-size: 1.33333333em; /*24px/18px*/
   background-position: 50%;
   font-size: 100%;
   padding: 0;
   border: 0;
+}
+
+#favorite-button.no-fill {
+  background: url("../icons/ic_favorite_border_black_24px.svg") no-repeat;
+  background-position: 50%;
+}
+
+#favorite-button.fill {
+  background: url("../icons/ic_favorite_black_24px.svg") no-repeat;
+  background-position: 50%;
 }
 
 .toolbar li {
