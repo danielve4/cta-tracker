@@ -66,6 +66,9 @@ jQuery(function($) {
 
     function getRouteStops(route, direction) {
       $('#stops').empty();
+      $('#stops').append(
+        '<li class="list-subheader">Route '+routes[route].routeName+' - '+ direction+' -  Choose a stop</li>'
+      );
       $.when($.ajax({
         type: 'GET',
         url: '/cta/'+route+','+direction
@@ -77,9 +80,6 @@ jQuery(function($) {
     }
 
     function listRouteStops(stops, route, direction) {
-      $('#stops').append(
-        '<li class="list-subheader">Route '+routes[route].routeName+' - '+ direction+' -  Choose a stop</li>'
-      );
       for(var m=0;m<stops.length;m++) {
         $('#stops').append(
           '<li><a href="#rt-name='+stops[m].stpnm+'#dir='+direction+'#stop-id='+stops[m].stpid+'">'
@@ -91,7 +91,7 @@ jQuery(function($) {
 
     function getPredictions(routeName, direction, stopId) {
       $('#arrivals').empty();
-      $('#arrivals').append('<li class="list-subheader">Route '+routeName+' - '+ direction+'</li>');
+      $('#arrivals').append('<li class="list-subheader">'+routeName+' - '+ direction+'</li>');
       $.when($.ajax({
         type: 'GET',
         url: '/cta/'+stopId
@@ -104,13 +104,15 @@ jQuery(function($) {
 
     function listPredictions(predictions) {
       console.log(predictions);
+      var min;
       if(predictions.hasOwnProperty('prd')) {
         for(var n=0;n<predictions.prd.length;n++) {
+          min=(isNaN(predictions.prd[n].prdctdn) ? '':'m');
           $('#arrivals').append(
             '<li class="prediction">'+
             '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
             '<span class="destination">To '+predictions.prd[n].des+'</span>'+
-            '<span class="arrival-time">'+predictions.prd[n].prdctdn+'m</span>'+
+            '<span class="arrival-time">'+predictions.prd[n].prdctdn+min+'</span>'+
             '</li>'
           );
         }
