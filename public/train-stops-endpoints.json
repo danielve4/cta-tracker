@@ -288,13 +288,13 @@
               "direction": "North"
             },
             {
-              "stationName": "Harlem",
+              "stationName": "Harlem-O'Hare",
               "stopId": "30145",
               "mapId": "40750",
               "direction": "North"
             },
             {
-              "stationName": "Harlem",
+              "stationName": "Harlem-Forest Park",
               "stopId": "30189",
               "mapId": "40980",
               "direction": "East"
