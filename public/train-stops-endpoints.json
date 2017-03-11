@@ -1,0 +1,414 @@
+{
+  "trainLines": [
+    {
+      "lineName": "Blue Line",
+      "directions": [
+        {
+          "direction": "Forest Park",
+          "stops": [
+            {
+              "stationName": "Addison",
+              "stopId": "30240",
+              "mapId": "41240",
+              "direction": "South"
+            },
+            {
+              "stationName": "Austin",
+              "stopId": "30002",
+              "mapId": "40010",
+              "direction": "West"
+            },
+            {
+              "stationName": "Belmont",
+              "stopId": "30013",
+              "mapId": "40060",
+              "direction": "South"
+            },
+            {
+              "stationName": "California",
+              "stopId": "30112",
+              "mapId": "40570",
+              "direction": "South"
+            },
+            {
+              "stationName": "Chicago",
+              "stopId": "30272",
+              "mapId": "41410",
+              "direction": "South"
+            },
+            {
+              "stationName": "Cicero",
+              "stopId": "30188",
+              "mapId": "40970",
+              "direction": "West"
+            },
+            {
+              "stationName": "Clark/Lake",
+              "stopId": "30374",
+              "mapId": "40380",
+              "direction": "South"
+            },
+            {
+              "stationName": "Clinton",
+              "stopId": "30085",
+              "mapId": "40430",
+              "direction": "West"
+            },
+            {
+              "stationName": "Cumberland",
+              "stopId": "30045",
+              "mapId": "40230",
+              "direction": "South"
+            },
+            {
+              "stationName": "Damen",
+              "stopId": "30116",
+              "mapId": "40590",
+              "direction": "South"
+            },
+            {
+              "stationName": "Division",
+              "stopId": "30063",
+              "mapId": "40320",
+              "direction": "South"
+            },
+            {
+              "stationName": "Forest Park",
+              "stopId": "30077",
+              "mapId": "40390",
+              "direction": "West"
+            },
+            {
+              "stationName": "Grand",
+              "stopId": "30096",
+              "mapId": "40490",
+              "direction": "South"
+            },
+            {
+              "stationName": "Harlem-Forest Park",
+              "stopId": "30190",
+              "mapId": "40980",
+              "direction": "West"
+            },
+            {
+              "stationName": "Harlem-O'Hare",
+              "stopId": "30146",
+              "mapId": "40750",
+              "direction": "South"
+            },
+            {
+              "stationName": "Illinois Medical District",
+              "stopId": "30158",
+              "mapId": "40810",
+              "direction": "West"
+            },
+            {
+              "stationName": "Irving Park",
+              "stopId": "30108",
+              "mapId": "40550",
+              "direction": "South"
+            },
+            {
+              "stationName": "Jackson",
+              "stopId": "30015",
+              "mapId": "40070",
+              "direction": "South"
+            },
+            {
+              "stationName": "Jefferson Park",
+              "stopId": "30248",
+              "mapId": "41280",
+              "direction": "South"
+            },
+            {
+              "stationName": "Kedzie-Homan",
+              "stopId": "30049",
+              "mapId": "40250",
+              "direction": "West"
+            },
+            {
+              "stationName": "LaSalle",
+              "stopId": "30262",
+              "mapId": "41340",
+              "direction": "West"
+            },
+            {
+              "stationName": "Logan Square",
+              "stopId": "30198",
+              "mapId": "41020",
+              "direction": "South"
+            },
+            {
+              "stationName": "Monroe",
+              "stopId": "30154",
+              "mapId": "40790",
+              "direction": "South"
+            },
+            {
+              "stationName": "Montrose",
+              "stopId": "30260",
+              "mapId": "41330",
+              "direction": "South"
+            },
+            {
+              "stationName": "O'Hare",
+              "stopId": "30172",
+              "mapId": "40890",
+              "direction": "South"
+            },
+            {
+              "stationName": "Oak Park",
+              "stopId": "30035",
+              "mapId": "40180",
+              "direction": "West"
+            },
+            {
+              "stationName": "Pulaski",
+              "stopId": "30180",
+              "mapId": "40920",
+              "direction": "West"
+            },
+            {
+              "stationName": "Racine",
+              "stopId": "30093",
+              "mapId": "40470",
+              "direction": "West"
+            },
+            {
+              "stationName": "Rosemont",
+              "stopId": "30160",
+              "mapId": "40820",
+              "direction": "South"
+            },
+            {
+              "stationName": "UIC-Halsted",
+              "stopId": "30069",
+              "mapId": "40350",
+              "direction": "West"
+            },
+            {
+              "stationName": "Washington",
+              "stopId": "30073",
+              "mapId": "40370",
+              "direction": "South"
+            },
+            {
+              "stationName": "Western-Forest Park",
+              "stopId": "30043",
+              "mapId": "40220",
+              "direction": "West"
+            },
+            {
+              "stationName": "Western-O'Hare",
+              "stopId": "30130",
+              "mapId": "40670",
+              "direction": "South"
+            }
+          ]
+        },
+        {
+          "direction": "O'Hare",
+          "stops":[
+            {
+              "stationName": "Addison",
+              "stopId": "30239",
+              "mapId": "41240",
+              "direction": "North"
+            },
+            {
+              "stationName": "Austin",
+              "stopId": "30001",
+              "mapId": "40010",
+              "direction": "East"
+            },
+            {
+              "stationName": "Belmont",
+              "stopId": "30012",
+              "mapId": "40060",
+              "direction": "North"
+            },
+            {
+              "stationName": "California",
+              "stopId": "30111",
+              "mapId": "40570",
+              "direction": "North"
+            },
+            {
+              "stationName": "Chicago",
+              "stopId": "30271",
+              "mapId": "41410",
+              "direction": "North"
+            },
+            {
+              "stationName": "Cicero",
+              "stopId": "30187",
+              "mapId": "40970",
+              "direction": "East"
+            },
+            {
+              "stationName": "Clark/Lake",
+              "stopId": "30375",
+              "mapId": "40380",
+              "direction": "North"
+            },
+            {
+              "stationName": "Clinton",
+              "stopId": "30084",
+              "mapId": "40430",
+              "direction": "East"
+            },
+            {
+              "stationName": "Cumberland",
+              "stopId": "30044",
+              "mapId": "40230",
+              "direction": "North"
+            },
+            {
+              "stationName": "Damen",
+              "stopId": "30115",
+              "mapId": "40590",
+              "direction": "North"
+            },
+            {
+              "stationName": "Division",
+              "stopId": "30062",
+              "mapId": "40320",
+              "direction": "North"
+            },
+            {
+              "stationName": "Forest Park",
+              "stopId": "30076",
+              "mapId": "40390",
+              "direction": "East"
+            },
+            {
+              "stationName": "Grand",
+              "stopId": "30095",
+              "mapId": "40490",
+              "direction": "North"
+            },
+            {
+              "stationName": "Harlem",
+              "stopId": "30145",
+              "mapId": "40750",
+              "direction": "North"
+            },
+            {
+              "stationName": "Harlem",
+              "stopId": "30189",
+              "mapId": "40980",
+              "direction": "East"
+            },
+            {
+              "stationName": "Illinois Medical District",
+              "stopId": "30157",
+              "mapId": "40810",
+              "direction": "East"
+            },
+            {
+              "stationName": "Irving Park",
+              "stopId": "30107",
+              "mapId": "40550",
+              "direction": "North"
+            },
+            {
+              "stationName": "Jackson",
+              "stopId": "30014",
+              "mapId": "40070",
+              "direction": "North"
+            },
+            {
+              "stationName": "Jefferson Park",
+              "stopId": "30247",
+              "mapId": "41280",
+              "direction": "North"
+            },
+            {
+              "stationName": "Kedzie-Homan",
+              "stopId": "30048",
+              "mapId": "40250",
+              "direction": "East"
+            },
+            {
+              "stationName": "LaSalle",
+              "stopId": "30261",
+              "mapId": "41340",
+              "direction": "East"
+            },
+            {
+              "stationName": "Logan Square",
+              "stopId": "30197",
+              "mapId": "41020",
+              "direction": "North"
+            },
+            {
+              "stationName": "Monroe",
+              "stopId": "30153",
+              "mapId": "40790",
+              "direction": "North"
+            },
+            {
+              "stationName": "Montrose",
+              "stopId": "30259",
+              "mapId": "41330",
+              "direction": "North"
+            },{
+              "stationName": "O'Hare",
+              "stopId": "30171",
+              "mapId": "40890",
+              "direction": "North"
+            },
+            {
+              "stationName": "Oak Park",
+              "stopId": "30034",
+              "mapId": "40180",
+              "direction": "East"
+            },
+            {
+              "stationName": "Pulaski",
+              "stopId": "30179",
+              "mapId": "40920",
+              "direction": "East"
+            },
+            {
+              "stationName": "Racine",
+              "stopId": "30092",
+              "mapId": "40470",
+              "direction": "East"
+            },
+            {
+              "stationName": "Rosemont",
+              "stopId": "30159",
+              "mapId": "40820",
+              "direction": "North"
+            },
+            {
+              "stationName": "UIC-Halsted",
+              "stopId": "30068",
+              "mapId": "40350",
+              "direction": "East"
+            },
+            {
+              "stationName": "Washington",
+              "stopId": "30072",
+              "mapId": "40370",
+              "direction": "North"
+            },
+            {
+              "stationName": "Western-Forest Park",
+              "stopId": "30042",
+              "mapId": "40220",
+              "direction": "East"
+            },
+            {
+              "stationName": "Western-O'Hare",
+              "stopId": "30129",
+              "mapId": "40670",
+              "direction": "North"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
