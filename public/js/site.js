@@ -51,9 +51,14 @@ jQuery(function($) {
           if(!context.hasOwnProperty('dir')) {
             setScreenTo(DIRECT);
             listLineDirections(context['tl'])
-          } else if(context.hasOwnProperty('dir')) {
+          } else if(context.hasOwnProperty('dir') &&
+                    !context.hasOwnProperty('stop')) {
             setScreenTo(STOPS);
             listLineStops(context['tl'], context['dir']);
+          } else if(context.hasOwnProperty('dir') &&
+                    context.hasOwnProperty('stop')) {
+            setScreenTo(ARRIVALS);
+            getTrainPredictions(context['tl'],context['dir'],context['stop']);
           }
         }
       }
@@ -136,7 +141,7 @@ jQuery(function($) {
       );
       $.when($.ajax({
         type: 'GET',
-        url: '/cta/'+route+','+direction
+        url: '/cta/bus/'+route+','+direction
       })).then(function(data) {
         listRouteStops(data, route, direction);
       }, function () {
@@ -155,7 +160,21 @@ jQuery(function($) {
     }
 
     function getTrainPredictions(lineIndex, directionIndex, stopIndex) {
-
+      var line = trainLines.trainLines[lineIndex];
+      var direction = line.directions[directionIndex];
+      var stop = direction.stops[stopIndex];
+      var stopId = stop.stopId;
+      var mapId = stop.mapId;
+      $('#arrivals').empty();
+      $('#arrivals').append('<li class="list-subheader">Something here :o</li>');
+      $.when($.ajax({
+        type: 'GET',
+        url: '/cta/train/'+stopId+','+mapId
+      })).then(function(data) {
+        console.log(data);
+      }, function () {
+        console.log('Error');
+      });
     }
 
     function getBusPredictions(routeName, direction, stopId) {
@@ -163,7 +182,7 @@ jQuery(function($) {
       $('#arrivals').append('<li class="list-subheader">'+routeName+' - '+ direction+'</li>');
       $.when($.ajax({
         type: 'GET',
-        url: '/cta/'+stopId
+        url: '/cta/bus/'+stopId
       })).then(function(data) {
         listPredictions(data);
       }, function () {
