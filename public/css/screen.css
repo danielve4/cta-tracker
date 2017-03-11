@@ -54,7 +54,7 @@ nav {
   line-height: 1.2em; /*24px/20px = 1.2em*/
   padding-bottom: 1em; /*20px*/
   padding-top: 0.6em; /*12px*/
-  padding-left: 3.6em; /*72px*/
+  padding-left: 0.8em; /*16px*/
   width: 50%;
   display: inline-block;
   font-weight: bold;
