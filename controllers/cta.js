@@ -26,9 +26,53 @@ router.get('/bus/:stopId', function(request, response) {
 router.get('/train/:stopId,:mapId', function(request, response) {
   var stopId = request.params.stopId;
   var mapId = request.params.mapId;
+  var predictions = {
+    'predictions':[]
+  };
+  var aPrediction;
 
-  getTrainPredictions(stopId, mapId, function (predictions) {
-    response.send(predictions['ctatt']);
+  getTrainPredictions(stopId, mapId, function (pred) {
+    if(pred.ctatt.errCd == 0) {
+      var aP, predictionTime, tempTime, diff, diffMins;
+      for(var i=0;i<pred.ctatt.eta.length;i++) {
+        aPrediction = {};
+        aP = pred.ctatt.eta[i];
+        predictionTime = new Date(aP.prdt);
+        tempTime = new Date(aP.arrT);
+        diff = tempTime - predictionTime;
+        diffMins = Math.round((diff/1000)/60); // minutes
+        aPrediction['eta'] = diffMins;
+        switch(aP.rt) {
+          case 'Brn':
+            aPrediction['line'] = 'Brown';
+            break;
+          case 'G':
+            aPrediction['line'] = 'Green';
+            break;
+          case 'Org':
+            aPrediction['line'] = 'Orange';
+            break;
+          case 'P':
+            aPrediction['line'] = 'Purple';
+            break;
+          case 'Y':
+            aPrediction['line'] = 'Yellow';
+            break;
+          default:
+            aPrediction['line'] = aP.rt;
+            break;
+        }
+        aPrediction['run'] = aP.rn;
+        aPrediction['destination'] = aP.destNm;
+        aPrediction['isApp'] = aP.isApp;
+        aPrediction['isSch'] = aP.isSch;
+        aPrediction['isDly'] = aP.isDly;
+        predictions.predictions[i] = aPrediction;
+      }
+      response.send(predictions);
+    } else {
+      response.send("There was an error");
+    }
   });
 });
 
