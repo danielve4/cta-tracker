@@ -5,6 +5,7 @@
       "directions": [
         {
           "direction": "Forest Park",
+          "trainDirection": 5,
           "stops": [
             {
               "stationName": "Addison",
@@ -208,6 +209,7 @@
         },
         {
           "direction": "O'Hare",
+          "trainDirection": 1,
           "stops":[
             {
               "stationName": "Addison",
