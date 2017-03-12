@@ -23,15 +23,14 @@ router.get('/bus/:stopId', function(request, response) {
   });
 });
 
-router.get('/train/:stopId,:mapId', function(request, response) {
-  var stopId = request.params.stopId;
+router.get('/train/:mapId', function(request, response) {
   var mapId = request.params.mapId;
   var predictions = {
     'predictions':[]
   };
   var aPrediction;
 
-  getTrainPredictions(stopId, mapId, function (pred) {
+  getTrainPredictions(mapId, function (pred) {
     if(pred.ctatt.errCd == 0) {
       var aP, predictionTime, tempTime, diff, diffMins;
       for(var i=0;i<pred.ctatt.eta.length;i++) {
@@ -67,6 +66,7 @@ router.get('/train/:stopId,:mapId', function(request, response) {
         aPrediction['isApp'] = aP.isApp;
         aPrediction['isSch'] = aP.isSch;
         aPrediction['isDly'] = aP.isDly;
+        aPrediction['trDr'] = aP.trDr;
         predictions.predictions[i] = aPrediction;
       }
       response.send(predictions);
@@ -85,9 +85,9 @@ function getRouteStops(route, direction, callback) {
   });
 }
 
-function getTrainPredictions(stopId, mapId, callback) {
+function getTrainPredictions(mapId, callback) {
   var predictionQuery = 'http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key='+ctaTrainKey +
-      '&stpid='+stopId+'&mapid='+mapId+'&outputType=JSON';
+      '&mapid='+mapId+'&outputType=JSON';
   httpget(predictionQuery, function (data) {
     callback(data);
   });
