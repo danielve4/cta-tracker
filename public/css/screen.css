@@ -167,6 +167,46 @@ nav {
   color: #80CBC4;
 }
 
+.line-color {
+  display: inline-block;
+  width: 1em; /*18px*/
+  height: 1em; /*18px*/
+  margin-right: 1.5em; /*27px* | 45px-18px = 27px*/
+  border-radius: 50%;
+}
+
+.line-color.Blu {
+  background-color: #00a1de;
+}
+
+.line-color.Bro {
+  background-color: #62361b;
+}
+
+.line-color.Gre {
+  background-color: #009b3a;
+}
+
+.line-color.Ora {
+  background-color: #f9461c;
+}
+
+.line-color.Pin {
+  background-color: #e27ea6;
+}
+
+.line-color.Pur {
+  background-color: #522398;
+}
+
+.line-color.Red {
+  background-color: #c60c30;
+}
+
+.line-color.Yel {
+  background-color: #f9e300;
+}
+
 .arrival-time {
   font-size: 1.802055556em;
   float: right;
