@@ -166,11 +166,12 @@ jQuery(function($) {
       var stopId = stop.stopId;
       var mapId = stop.mapId;
       $('#arrivals').empty();
-      $('#arrivals').append('<li class="list-subheader">Something here :o</li>');
+      $('#arrivals').append('<li class="list-subheader">'+stop.stationName+' - '+stop.direction+' Bound</li>');
       $.when($.ajax({
         type: 'GET',
         url: '/cta/train/'+stopId+','+mapId
       })).then(function(data) {
+        listTrainPrediction(data, lineIndex, directionIndex, stopIndex);
         console.log(data);
       }, function () {
         console.log('Error');
@@ -188,6 +189,20 @@ jQuery(function($) {
       }, function () {
         console.log('Error');
       });
+    }
+
+    function listTrainPrediction(predictions) {
+      if(predictions.hasOwnProperty('predictions')) {
+        for(var i=0;i<predictions.predictions.length;i++) {
+          $('#arrivals').append(
+            '<li class="prediction">'+
+            //'<span class="route-number">'+predictions.prd[n].rt+'</span>'+
+            '<span class="destination">To '+predictions.predictions[i].destination+'</span>'+
+            '<span class="arrival-time">'+predictions.predictions[i].eta+'m</span>'+
+            '</li>'
+          );
+        }
+      }
     }
 
     function listPredictions(predictions) {
