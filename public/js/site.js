@@ -101,7 +101,7 @@ jQuery(function($) {
       for(var i=0;i<line.directions.length;i++) {
         $('#route-directions').append(
           '<li><a href="#tl='+lineIndex+'#dir='+i+'">'
-          +line.directions[i].direction+
+          +'To '+line.directions[i].direction+
           '</a></li>'
         );
       }
