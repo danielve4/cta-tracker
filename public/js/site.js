@@ -71,7 +71,9 @@ jQuery(function($) {
         line = trainLines.trainLines[i];
         $('#routes').append(
           '<li>' +
-            '<a href="#tl='+i+'">'+line.lineName+'</a>'+
+            '<a href="#tl='+i+'">'+
+              '<span class="line-color '+line.lineName.substring(0,3)+'"></span>'+
+              '<span class="route-name">' +line.lineName+ '</span></a>'+
           '</li>'
         );
       }
@@ -84,7 +86,7 @@ jQuery(function($) {
         $('#routes').append(
           '<li>' +
             '<a href="#rt='+route.routeNumber+'"id="'+route.routeNumber+'">' +
-              '<span class="route-number">'+route.routeNumber+ '</span> ' +
+              '<span class="route-number">'+route.routeNumber+ '</span>' +
               '<span class="route-name">' +route.routeName+ '</span>' +
             '</a>' +
           '</li>'
