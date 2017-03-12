@@ -163,15 +163,15 @@ jQuery(function($) {
       var line = trainLines.trainLines[lineIndex];
       var direction = line.directions[directionIndex];
       var stop = direction.stops[stopIndex];
-      var stopId = stop.stopId;
       var mapId = stop.mapId;
+      var trDr = direction.trainDirection;
       $('#arrivals').empty();
       $('#arrivals').append('<li class="list-subheader">'+stop.stationName+' - '+stop.direction+' Bound</li>');
       $.when($.ajax({
         type: 'GET',
-        url: '/cta/train/'+stopId+','+mapId
+        url: '/cta/train/'+mapId
       })).then(function(data) {
-        listTrainPrediction(data, lineIndex, directionIndex, stopIndex);
+        listTrainPrediction(data, trDr);
         console.log(data);
       }, function () {
         console.log('Error');
@@ -191,16 +191,18 @@ jQuery(function($) {
       });
     }
 
-    function listTrainPrediction(predictions) {
+    function listTrainPrediction(predictions, trDr) {
       if(predictions.hasOwnProperty('predictions')) {
         for(var i=0;i<predictions.predictions.length;i++) {
-          $('#arrivals').append(
-            '<li class="prediction">'+
-            //'<span class="route-number">'+predictions.prd[n].rt+'</span>'+
-            '<span class="destination">To '+predictions.predictions[i].destination+'</span>'+
-            '<span class="arrival-time">'+predictions.predictions[i].eta+'m</span>'+
-            '</li>'
-          );
+          if(predictions.predictions[i].trDr == trDr) {
+            $('#arrivals').append(
+              '<li class="prediction">'+
+              //'<span class="route-number">'+predictions.prd[n].rt+'</span>'+
+              '<span class="destination">To '+predictions.predictions[i].destination+'</span>'+
+              '<span class="arrival-time">'+predictions.predictions[i].eta+'m</span>'+
+              '</li>'
+            );
+          }
         }
       }
     }
