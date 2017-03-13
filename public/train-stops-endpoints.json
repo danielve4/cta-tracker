@@ -586,7 +586,170 @@
         {
           "direction": "Loop",
           "trainDirection": 5,
-          "stops":""
+          "stops":[
+            {
+              "stationName": "Adams/Wabash",
+              "stopId": "30131",
+              "mapId": "40680",
+              "direction": "North"
+            },
+            {
+              "stationName": "Addison",
+              "stopId": "30278",
+              "mapId": "41440",
+              "direction": "South"
+            },
+            {
+              "stationName": "Armitage",
+              "stopId": "30128",
+              "mapId": "40660",
+              "direction": "South"
+            },
+            {
+              "stationName": "Belmont",
+              "stopId": "30258",
+              "mapId": "41320",
+              "direction": "South"
+            },
+            {
+              "stationName": "Chicago",
+              "stopId": "30138",
+              "mapId": "40710",
+              "direction": "South"
+            },
+            {
+              "stationName": "Clark/Lake",
+              "stopId": "30075",
+              "mapId": "40380",
+              "direction": "West"
+            },
+            {
+              "stationName": "Damen",
+              "stopId": "30019",
+              "mapId": "40090",
+              "direction": "South"
+            },
+            {
+              "stationName": "Diversey",
+              "stopId": "30104",
+              "mapId": "40530",
+              "direction": "South"
+            },
+            {
+              "stationName": "Francisco",
+              "stopId": "30168",
+              "mapId": "40870",
+              "direction": "South"
+            },
+            {
+              "stationName": "Fullerton",
+              "stopId": "30236",
+              "mapId": "41220",
+              "direction": "South"
+            },
+            {
+              "stationName": "Harold Washington Library",
+              "stopId": "30165",
+              "mapId": "40850",
+              "direction": "East"
+            },
+            {
+              "stationName": "Irving Park",
+              "stopId": "30282",
+              "mapId": "41460",
+              "direction": "South"
+            },
+            {
+              "stationName": "Kedzie",
+              "stopId": "30226",
+              "mapId": "41180",
+              "direction": "South"
+            },
+            {
+              "stationName": "Kimball",
+              "stopId": "30250",
+              "mapId": "41290",
+              "direction": "South"
+            },
+            {
+              "stationName": "LaSalle/Van Buren",
+              "stopId": "30030",
+              "mapId": "40160",
+              "direction": "East"
+            },
+            {
+              "stationName": "Merchandise Mart",
+              "stopId": "30091",
+              "mapId": "40460",
+              "direction": "South"
+            },
+            {
+              "stationName": "Montrose",
+              "stopId": "30288",
+              "mapId": "41500",
+              "direction": "South"
+            },
+            {
+              "stationName": "Paulina",
+              "stopId": "30254",
+              "mapId": "41310",
+              "direction": "South"
+            },
+            {
+              "stationName": "Quincy/Wells",
+              "stopId": "30008",
+              "mapId": "40040",
+              "direction": "South"
+            },
+            {
+              "stationName": "Randolph/Wabash",
+              "stopId": "30038",
+              "mapId": "40200",
+              "direction": "North"
+            },
+            {
+              "stationName": "Rockwell",
+              "stopId": "30196",
+              "mapId": "41010",
+              "direction": "South"
+            },
+            {
+              "stationName": "Sedgwick",
+              "stopId": "30156",
+              "mapId": "40800",
+              "direction": "South"
+            },
+            {
+              "stationName": "Southport",
+              "stopId": "30071",
+              "mapId": "40360",
+              "direction": "South"
+            },
+            {
+              "stationName": "State/Lake",
+              "stopId": "30051",
+              "mapId": "40260",
+              "direction": "West"
+            },
+            {
+              "stationName": "Washington/Wells",
+              "stopId": "30142",
+              "mapId": "40730",
+              "direction": "South"
+            },
+            {
+              "stationName": "Wellington",
+              "stopId": "30232",
+              "mapId": "41210",
+              "direction": "South"
+            },
+            {
+              "stationName": "Western",
+              "stopId": "30284",
+              "mapId": "41480",
+              "direction": "South"
+            }
+          ]
         }
       ]
     },
