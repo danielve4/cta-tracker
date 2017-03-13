@@ -168,7 +168,7 @@ jQuery(function($) {
     function getTrainPredictions(lineIndex, directionIndex, stopIndex) {
       var line = trainLines.trainLines[lineIndex];
       var direction = line.directions[directionIndex];
-      var stop = direction.stops[stopIndex];
+      var stop = trainLines.stops[stopIndex];
       var mapId = stop.mapId;
       var stopId = stop.stopId;
       var trDr = direction.trainDirection;
@@ -201,10 +201,10 @@ jQuery(function($) {
     function listTrainPrediction(predictions, trDr, stopId) {
       if(predictions.hasOwnProperty('predictions')) {
         for(var i=0;i<predictions.predictions.length;i++) {
-          if(predictions.predictions[i].stopId == stopId) {
+          if(predictions.predictions[i].stopId == stopId || predictions.predictions[i].trDr == trDr) {
             $('#arrivals').append(
               '<li class="prediction">'+
-              //'<span class="route-number">'+predictions.prd[n].rt+'</span>'+
+              '<span class="line-color '+predictions.predictions[i].line.substring(0,3)+'"></span>'+
               '<span class="destination">To '+predictions.predictions[i].destination+'</span>'+
               '<span class="arrival-time">'+predictions.predictions[i].eta+'m</span>'+
               '</li>'
@@ -243,21 +243,34 @@ jQuery(function($) {
     function listFavorites() {
       $('#favorites').empty();
       loadFavorites();
-      var rNum, rName, direc,stopId;
+      var route, routeName, direction, stopI, fav;
       for(var p=0;p<favorites.favorites.length;p++) {
-        rNum = favorites.favorites[p].routeNumber;
-        rName = favorites.favorites[p].routeName;
-        direc = favorites.favorites[p].direction;
-        stopId = favorites.favorites[p].stopId;
-        $('#favorites').append(
-          '<li>' +
-            '<a href="#rt='+rNum+'#rt-name='+rName+'#dir='+direc+'#stop-id='+stopId+'">' +
-              '<span class="route-number">'+rNum+'</span>'+
-              '<span class="route-direction">'+direc.charAt(0)+'</span>'+
-              '<span class="route-name">'+rName+'</span>'+
+        fav = favorites.favorites[p];
+        if(favorites.favorites[p].hasOwnProperty('train')) {
+          $('#favorites').append(
+            '<li>' +
+              '<a href="#tl='+fav.trainLine+'#dir='+fav.direction+'#stop='+fav.stop+'">' +
+                '<span class="line-color '+trainLines.trainLines[fav.trainLine].lineName.substring(0,3)+'"></span>'+
+                '<span class="route-direction">'+trainLines.stops[fav.stop].direction.charAt(0)+'</span>'+
+                '<span class="route-name">'+trainLines.stops[fav.stop].stationName+'</span>'+
+              '</a>' +
+            '</li>'
+          );
+        } else if(!favorites.favorites[p].hasOwnProperty('train')) {
+          route = favorites.favorites[p].routeNumber;
+          routeName = favorites.favorites[p].routeName;
+          direction = favorites.favorites[p].direction;
+          stopI = favorites.favorites[p].stopId;
+          $('#favorites').append(
+            '<li>' +
+            '<a href="#rt='+route+'#rt-name='+routeName+'#dir='+direction+'#stop-id='+stopI+'">' +
+            '<span class="route-number">'+route+'</span>'+
+            '<span class="route-direction">'+direction.charAt(0)+'</span>'+
+            '<span class="route-name">'+routeName+'</span>'+
             '</a>' +
-          '</li>'
-        );
+            '</li>'
+          );
+        }
       }
     }
 
@@ -280,6 +293,7 @@ jQuery(function($) {
         };
       }
       favorites =  favoritesJSON;
+      console.log(favorites);
     }
 
     function toggleFavorite() {
@@ -294,12 +308,23 @@ jQuery(function($) {
       var exists = isFavorite();
       if(exists <= 0) { //Favorite does not exist
         var url = parseHash(location.hash);
-        var newFavorite = {
-          'routeNumber':url['rt'],
-          'direction': url['dir'],
-          'routeName':url['rt-name'].replace(/%20/g, ' '),
-          'stopId':url['stop-id']
-        };
+        var newFavorite;
+        if(url.hasOwnProperty('stop-id') && url.hasOwnProperty('rt') &&
+          url.hasOwnProperty('rt-name') && url.hasOwnProperty('dir')) {
+          newFavorite = {
+            'routeNumber': url['rt'],
+            'direction': url['dir'],
+            'routeName': url['rt-name'].replace(/%20/g, ' '),
+            'stopId': url['stop-id']
+          };
+        } else if(url.hasOwnProperty('tl') && url.hasOwnProperty('stop') && url.hasOwnProperty('dir')) {
+          newFavorite = {
+            'train': true,
+            'trainLine': url['tl'],
+            'stop': url['stop'],
+            'direction': url['dir']
+          };
+        }
         favorites.favorites.push(newFavorite);
         localStorage.setItem(storageItem, JSON.stringify(favorites));
         $('#favorite-button').removeClass('no-fill');
@@ -330,13 +355,31 @@ jQuery(function($) {
 
     function isFavorite() {
       var url = parseHash(location.hash);
+      var stop;
+      var u;
       loadFavorites();
-      for (var u = 0; u < favorites.favorites.length; u++) {
-        if (url['dir'] === favorites.favorites[u].direction &&
-          url['rt-name'].replace(/%20/g, ' ') === favorites.favorites[u].routeName) {
-          return u;
+      if(url.hasOwnProperty('stop-id') && url.hasOwnProperty('rt') &&
+        url.hasOwnProperty('rt-name') && url.hasOwnProperty('dir')) {
+        for (u = 0; u < favorites.favorites.length; u++) {
+          if (!favorites.favorites[u].hasOwnProperty('train') &&
+            url['stop-id'] === favorites.favorites[u].stopId &&
+            url['dir'] === favorites.favorites[u].direction &&
+            url['rt'] === favorites.favorites[u].routeNumber &&
+            url['rt-name'].replace(/%20/g, ' ') === favorites.favorites[u].routeName) {
+            return u;
+          }
+        }
+      } else if(url.hasOwnProperty('tl') && url.hasOwnProperty('stop') && url.hasOwnProperty('dir')) {
+        for (u = 0; u < favorites.favorites.length; u++) {
+          if (favorites.favorites[u].hasOwnProperty('train') &&
+            url['tl'] === favorites.favorites[u].trainLine &&
+            url['stop'] === favorites.favorites[u].stop &&
+            url['dir'] === favorites.favorites[u].direction) {
+            return u;
+          }
         }
       }
+
       return -1;
     }
 
