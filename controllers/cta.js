@@ -68,6 +68,7 @@ router.get('/train/:mapId', function(request, response) {
           aPrediction['isSch'] = aP.isSch;
           aPrediction['isDly'] = aP.isDly;
           aPrediction['trDr'] = aP.trDr;
+          aPrediction['stopId'] = aP.stpId;
           predictions.predictions[i] = aPrediction;
         }
       }
