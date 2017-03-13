@@ -6,7 +6,7 @@ jQuery(function($) {
     var favorites = [];
     var trainLines;
     var routes;
-    $.getJSON('train-stops-endpoints.json', function(json) {
+    $.getJSON('allTrainStops.json', function(json) {
       trainLines = json;
       console.log('loaded trainLines');
       $.getJSON('stops.json', function(json) {
@@ -73,7 +73,7 @@ jQuery(function($) {
           '<li>' +
             '<a href="#tl='+i+'">'+
               '<span class="line-color '+line.lineName.substring(0,3)+'"></span>'+
-              '<span class="route-name">' +line.lineName+ '</span></a>'+
+              '<span class="route-name">' +line.lineName+ ' Line</span></a>'+
           '</li>'
         );
       }
@@ -97,7 +97,7 @@ jQuery(function($) {
     function listLineDirections(lineIndex) {
       var line = trainLines.trainLines[lineIndex];
       $('#route-directions').empty();
-      $('#route-directions').append('<li class="list-subheader">'+line.lineName+' - Choose a direction</li>');
+      $('#route-directions').append('<li class="list-subheader">'+line.lineName+' Line - Choose a direction</li>');
       for(var i=0;i<line.directions.length;i++) {
         $('#route-directions').append(
           '<li><a href="#tl='+lineIndex+'#dir='+i+'">'
@@ -123,16 +123,20 @@ jQuery(function($) {
     function listLineStops(lineIndex, directionIndex) {
       var line = trainLines.trainLines[lineIndex];
       var direction = line.directions[directionIndex];
+      var aStop;
       $('#stops').empty();
       $('#stops').append(
-        '<li class="list-subheader">'+line.lineName+' - '+ direction.direction+' -  Choose a stop</li>'
+        '<li class="list-subheader">'+line.lineName+' Line - '+ direction.direction+' -  Choose a stop</li>'
       );
-      for(var i=0;i<direction.stops.length;i++) {
-        $('#stops').append(
-          '<li><a href="#tl='+lineIndex+'#dir='+directionIndex+'#stop='+i+'">'
-          +direction.stops[i].stationName+
-          '</a></li>'
-        );
+      for(var i=0;i<trainLines.stops.length;i++) {
+        aStop = trainLines.stops[i];
+        if(aStop[line.lineName] && aStop.trDr == direction.trainDirection) {
+          $('#stops').append(
+            '<li><a href="#tl='+lineIndex+'#dir='+directionIndex+'#stop='+i+'">'
+            +aStop.stationName+
+            '</a></li>'
+          );
+        }
       }
     }
 
@@ -166,6 +170,7 @@ jQuery(function($) {
       var direction = line.directions[directionIndex];
       var stop = direction.stops[stopIndex];
       var mapId = stop.mapId;
+      var stopId = stop.stopId;
       var trDr = direction.trainDirection;
       $('#arrivals').empty();
       $('#arrivals').append('<li class="list-subheader">'+stop.stationName+' - '+stop.direction+' Bound</li>');
@@ -173,7 +178,7 @@ jQuery(function($) {
         type: 'GET',
         url: '/cta/train/'+mapId
       })).then(function(data) {
-        listTrainPrediction(data, trDr);
+        listTrainPrediction(data, trDr, stopId);
         console.log(data);
       }, function () {
         console.log('Error');
@@ -193,10 +198,10 @@ jQuery(function($) {
       });
     }
 
-    function listTrainPrediction(predictions, trDr) {
+    function listTrainPrediction(predictions, trDr, stopId) {
       if(predictions.hasOwnProperty('predictions')) {
         for(var i=0;i<predictions.predictions.length;i++) {
-          if(predictions.predictions[i].trDr == trDr) {
+          if(predictions.predictions[i].stopId == stopId) {
             $('#arrivals').append(
               '<li class="prediction">'+
               //'<span class="route-number">'+predictions.prd[n].rt+'</span>'+
