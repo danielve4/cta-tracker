@@ -202,14 +202,16 @@ jQuery(function($) {
     function listTrainPrediction(predictions, trDr, stopId) {
       if(predictions.hasOwnProperty('predictions')) {
         var count = 0;
+        var date = new Date();
         for (var i = 0; i < predictions.predictions.length; i++) {
           if (predictions.predictions[i].stopId == stopId || predictions.predictions[i].trDr == trDr) {
             count++;
             $('#arrivals').append(
               '<li class="prediction">' +
-              '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
-              '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
-              '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
+                '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
+                '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
+                '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
+                '<span class="arrival-clock">'+ addMinutesAMPM(date, predictions.predictions[i].eta)+'</span>'+
               '</li>'
             );
           }
@@ -228,6 +230,7 @@ jQuery(function($) {
       console.log(predictions);
       var min;
       if(predictions.hasOwnProperty('prd')) {
+        var date = new Date();
         for(var n=0;n<predictions.prd.length;n++) {
           min=(isNaN(predictions.prd[n].prdctdn) ? '':'m');
           $('#arrivals').append(
@@ -235,6 +238,7 @@ jQuery(function($) {
             '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
             '<span class="destination">To '+predictions.prd[n].des+'</span>'+
             '<span class="arrival-time">'+predictions.prd[n].prdctdn+min+'</span>'+
+            '<span class="arrival-clock">'+ addMinutesAMPM(date, predictions.prd[n].prdctdn)+'</span>'+
             '</li>'
           );
         }
@@ -438,6 +442,19 @@ jQuery(function($) {
       }
       console.log(values);
       return values;
+    }
+
+    function addMinutesAMPM(currentDate, minutes) {
+      var date = currentDate;
+      date.setTime(currentDate.getTime() + (minutes * 60 * 1000));
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var amOrPm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + amOrPm;
+      return strTime;
     }
 
     $(window).on('hashchange', function() {
