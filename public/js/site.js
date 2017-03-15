@@ -59,6 +59,7 @@ jQuery(function($) {
                     context.hasOwnProperty('stop')) {
             setScreenTo(ARRIVALS);
             getTrainPredictions(context['tl'],context['dir'],context['stop']);
+            checkFavorite();
           }
         }
       }
@@ -200,16 +201,25 @@ jQuery(function($) {
 
     function listTrainPrediction(predictions, trDr, stopId) {
       if(predictions.hasOwnProperty('predictions')) {
-        for(var i=0;i<predictions.predictions.length;i++) {
-          if(predictions.predictions[i].stopId == stopId || predictions.predictions[i].trDr == trDr) {
+        var count = 0;
+        for (var i = 0; i < predictions.predictions.length; i++) {
+          if (predictions.predictions[i].stopId == stopId || predictions.predictions[i].trDr == trDr) {
+            count++;
             $('#arrivals').append(
-              '<li class="prediction">'+
-              '<span class="line-color '+predictions.predictions[i].line.substring(0,3)+'"></span>'+
-              '<span class="destination">To '+predictions.predictions[i].destination+'</span>'+
-              '<span class="arrival-time">'+predictions.predictions[i].eta+'m</span>'+
+              '<li class="prediction">' +
+              '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
+              '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
+              '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
               '</li>'
             );
           }
+        }
+        if(count == 0) {
+          $('#arrivals').append(
+            '<li class="prediction">' +
+              '<span>No arrival times</span>'+
+            '</li>'
+          );
         }
       }
     }
