@@ -27,7 +27,7 @@ h1 {
 a {
   text-decoration: none;
   display: block;
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: bold;
 }
 
@@ -205,6 +205,14 @@ nav {
 .arrival-time {
   font-size: 1.802055556em;
   float: right;
+}
+
+.arrival-clock {
+  display: block;
+  position: absolute;
+  margin-right: 0.611111111em; /*hald gridline*/
+  color: #EDEDED;
+  right: 0;
 }
 
 #page {
