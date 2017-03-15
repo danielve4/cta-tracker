@@ -19,8 +19,14 @@ jQuery(function($) {
 
     function decideScreen() {
       if(!location.hash) {
-        setScreenTo(FAV);
-        listFavorites();
+        if(loadFavorites() > 0) {
+          setScreenTo(FAV);
+          listFavorites();
+        } else {
+          setScreenTo(ROUTES);
+          listTrainLines();
+          listRoutes();
+        }
       } else {
         var context = parseHash(location.hash);
         if(context.hasOwnProperty('favorites')) {
@@ -308,6 +314,7 @@ jQuery(function($) {
       }
       favorites =  favoritesJSON;
       console.log(favorites);
+      return favorites.favorites.length;
     }
 
     function toggleFavorite() {
