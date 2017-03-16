@@ -207,12 +207,25 @@ nav {
   float: right;
 }
 
+.delayed {
+  display: block;
+  position: absolute;
+  left: 3.11111111em; /*45px + 11px = 56px = 3.11111em @ 18px*/
+  color:  #f44336;
+}
+
+.scheduled {
+  display: block;
+  position: absolute;
+  left: 3.11111111em; /*45px + 11px = 56px = 3.11111em @ 18px*/
+  color: #ffeb3b;
+}
+
 .arrival-clock {
   display: block;
   position: absolute;
-  margin-right: 0.611111111em; /*hald gridline*/
+  right: 0.611111111em;/*hald gridline = 11px*/
   color: #EDEDED;
-  right: 0;
 }
 
 #page {
