@@ -253,6 +253,15 @@ nav {
     padding-left: 3.33333%;
     padding-right: 3.33333%;
   }
+
+  .arrival-clock {
+    right: 3.33333%;
+  }
+
+  .scheduled,
+  .delayed {
+    left: calc(3.33333% + 2.5em); /*45px = 2.5em @ 18px*/
+  }
 }
 
 /* 600px @ 16px/em*/
@@ -263,6 +272,15 @@ nav {
     padding-left: 2.66667%;
     padding-right: 2.66667%;
   }
+
+  .arrival-clock {
+    right: 2.66667%;
+  }
+
+  .scheduled,
+  .delayed {
+    left: calc(2.66667% + 2.5em); /*45px = 2.5em @ 18px*/
+  }
 }
 
 /* 840px @ 16px/em*/
@@ -272,6 +290,15 @@ nav {
     padding-left: 19.04762%;
     padding-right: 19.04762%;
   }
+
+  .arrival-clock {
+    right: 19.04762%;
+  }
+
+  .scheduled,
+  .delayed {
+    left: calc(19.04762% + 2.5em); /*45px = 2.5em @ 18px*/
+  }
 }
 
 /* 1440px @ 16px/em*/
@@ -280,5 +307,14 @@ nav {
   #page {
     padding-left: 26.25%;
     padding-right: 26.25%;
+  }
+
+  .arrival-clock {
+    right: 26.25%;
+  }
+
+  .scheduled,
+  .delayed {
+    left: calc(26.25% + 2.5em); /*45px = 2.5em @ 18px*/
   }
 }
