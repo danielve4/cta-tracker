@@ -218,12 +218,14 @@ jQuery(function($) {
                 '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
                 '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
                 '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
+                ((predictions.predictions[i].isDly === '1') ? '<span class="delayed">Delayed</span>':'') +
+                ((predictions.predictions[i].isSch === '1') ? '<span class="scheduled">Scheduled</span>':'') +
                 '<span class="arrival-clock">'+ addMinutesAMPM(currentDate, futureDate, predictions.predictions[i].eta)+'</span>'+
               '</li>'
             );
           }
         }
-        if(count == 0) {
+        if(count === 0) {
           $('#arrivals').append(
             '<li class="prediction">' +
               '<span>No arrival times</span>'+
@@ -252,7 +254,7 @@ jQuery(function($) {
             '<li class="prediction">'+
               '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
               '<span class="destination">To '+predictions.prd[n].des+'</span>'+
-              '<span class="arrival-time">'+predictions.prd[n].prdctdn+min+'</span>'+
+              '<span class="arrival-time">'+predictions.prd[n].prdctdn+arrivalMinutes+'</span>'+
               arrivalClock +
             '</li>'
           );
@@ -265,7 +267,6 @@ jQuery(function($) {
     }
     
     $('#favorite-button').on('click', function (e) {
-      console.log('Favorite');
       toggleFavorite();
     });
 
@@ -436,7 +437,6 @@ jQuery(function($) {
           break;
         case STOPS:
           $('#stops').removeClass('hidden');
-          console.log('Stops');
           break;
         case ARRIVALS:
           $('#arrivals').removeClass('hidden');
@@ -460,8 +460,8 @@ jQuery(function($) {
       return values;
     }
 
-    function addMinutesAMPM(currentDate, futureDate, minutes) {
-      futureDate.setTime(currentDate.getTime() + (minutes * 60 * 1000));
+    function addMinutesAMPM(currentDate, futureDate, minutesToAdd) {
+      futureDate.setTime(currentDate.getTime() + (minutesToAdd * 60 * 1000));
       var hours = futureDate.getHours();
       var minutes = futureDate.getMinutes();
       var amOrPm = hours >= 12 ? 'pm' : 'am';
