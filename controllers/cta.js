@@ -87,6 +87,40 @@ router.get('/train/:mapId', function(request, response) {
   });
 });
 
+router.get('/train/follow/:runnum', function(request, response) {
+  var runNumber = request.params.runnum;
+  var predictions = {
+    'predictions':[]
+  };
+  var aPrediction;
+  
+  followTrainPredictions(runNumber, function (pred) {
+    if(pred.hasOwnProperty('ctatt') && pred.ctatt.errCd == 0) {
+      var aP, predictionTime, tempTime, diff, diffMins;
+      if(pred.ctatt.hasOwnProperty('eta')) {
+        for(var i=0;i<pred.ctatt.eta.length;i++) {
+          aPrediction = {};
+          aP = pred.ctatt.eta[i];
+          predictionTime = new Date(aP.prdt);
+          tempTime = new Date(aP.arrT);
+          diff = tempTime - predictionTime;
+          diffMins = Math.round((diff/1000)/60); // minutes
+          aPrediction['eta'] = diffMins;
+          aPrediction['run'] = aP.rn;
+          aPrediction['stopName'] = aP.staNm;
+          aPrediction['isSch'] = aP.isSch;
+          aPrediction['isDly'] = aP.isDly;
+          aPrediction['stopId'] = aP.staId;
+          predictions.predictions[i] = aPrediction;
+        }
+      }
+      response.send(predictions);
+    } else {
+      response.send("There was an error");
+    }
+  });
+});
+
 function getRouteStops(route, direction, callback) {
   var routeStopsQuery = 'http://ctabustracker.com/bustime/api/v2/getstops?key='+ctaBusKey+
     '&rt='+route+'&dir='+direction+'&format=json';
@@ -117,6 +151,12 @@ function followBusPredictions(vehicleId, callback) {
   httpget(followBusQuery, function (data) {
     callback(data);
   });
+}
+
+function followTrainPredictions(runNumber, callback) {
+  var followTrainQuery = 'http://lapi.transitchicago.com/api/1.0/ttfollow.aspx?key='+ctaTrainKey +
+    '&runnumber='+runNumber+'&outputType=JSON';
+  httpget(followTrainQuery, callback)
 }
 
 function httpget(query, callback) {
