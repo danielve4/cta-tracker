@@ -61,18 +61,24 @@ jQuery(function($) {
             listRouteDirections(context.rt);
           }
         } else if(context.hasOwnProperty('tl')) {
-          if(!context.hasOwnProperty('dir')) {
-            setScreenTo(DIRECT);
-            listLineDirections(context['tl'])
-          } else if(context.hasOwnProperty('dir') &&
+          if(context.hasOwnProperty('dir') &&
                     !context.hasOwnProperty('stop')) {
             setScreenTo(STOPS);
             listLineStops(context['tl'], context['dir']);
+          } else if(context.hasOwnProperty('run') &&
+            context.hasOwnProperty('dir') &&
+            context.hasOwnProperty('stop')) {
+            setScreenTo(FOLLOW);
+            getFollowTrainPredictions(context['run'], context['tl'], context['dir'], context['stop']);
+
           } else if(context.hasOwnProperty('dir') &&
                     context.hasOwnProperty('stop')) {
             setScreenTo(ARRIVALS);
             getTrainPredictions(context['tl'],context['dir'],context['stop']);
             checkFavorite();
+          } else {
+            setScreenTo(DIRECT);
+            listLineDirections(context['tl']);
           }
         }
       }
@@ -192,7 +198,7 @@ jQuery(function($) {
         type: 'GET',
         url: '/cta/train/'+mapId
       })).then(function(data) {
-        listTrainPrediction(data, trDr, stopId);
+        listTrainPrediction(data, trDr, stopId, lineIndex, directionIndex, stopIndex);
         console.log(data);
       }, function () {
         console.log('Error');
@@ -212,7 +218,7 @@ jQuery(function($) {
       });
     }
 
-    function listTrainPrediction(predictions, trDr, stopId) {
+    function listTrainPrediction(predictions, trDr, stopId, lineIndex, directionIndex, stopIndex) {
       if(predictions.hasOwnProperty('predictions')) {
         var count = 0;
         var currentDate = new Date();
@@ -222,7 +228,7 @@ jQuery(function($) {
             count++;
             $('#arrivals').append(
               '<li class="prediction">' +
-                '<a href="#favorites">'+
+                '<a href="#tl='+lineIndex+'#dir='+directionIndex+'#stop='+stopIndex+'#run='+predictions.predictions[i].run+'">'+
                 '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
                 '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
                 '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
@@ -276,6 +282,58 @@ jQuery(function($) {
         $('#arrivals').append(
           '<li class="prediction">'+predictions.error[0].msg+'</li>'
         );
+      }
+    }
+
+    function getFollowTrainPredictions(runNumber, lineIndex, directionIndex, stopIndex) {
+      var line = trainLines.trainLines[lineIndex];
+      var direction = line.directions[directionIndex];
+      var stop = trainLines.stops[stopIndex];
+      $('#follow').empty();
+      $('#follow').append('<li class="list-subheader">Train Run #'+runNumber+' - '+line.lineName+' Line - '+direction.direction+'</li>');
+      $.when($.ajax({
+        type: 'GET',
+        url: '/cta/train/follow/'+runNumber
+      })).then(function(data) {
+        listFollowTrain(data, stop.mapId);
+      }, function () {
+        console.log('Error');
+      });
+    }
+    
+    function listFollowTrain(predictions, stopId) {
+      console.log(predictions);
+      if(predictions.hasOwnProperty('predictions')) {
+        var count = 0;
+        var currentDate = new Date();
+        var futureDate = new Date();
+        var followStop;
+        for (var i = 0; i < predictions.predictions.length; i++) {
+          if(predictions.predictions[i].stopId == stopId) {
+            followStop = ' follow-stop';
+          } else {
+            followStop ='';
+          }
+          count++;
+          $('#follow').append(
+            '<li class="prediction'+followStop+'">' +
+            '<a href="#favorites">'+
+            '<span class="destination">' + predictions.predictions[i].stopName + '</span>' +
+            '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
+            ((predictions.predictions[i].isDly === '1') ? '<span class="delayed">Delayed</span>':'') +
+            ((predictions.predictions[i].isSch === '1') ? '<span class="scheduled">Scheduled</span>':'') +
+            '<span class="arrival-clock">'+ addMinutesAMPM(currentDate, futureDate, predictions.predictions[i].eta)+'</span>'+
+            '</a>'+
+            '</li>'
+          );
+        }
+        if(count === 0) {
+          $('#follow').append(
+            '<li class="prediction">' +
+            '<span>No arrival times</span>'+
+            '</li>'
+          );
+        }
       }
     }
 
