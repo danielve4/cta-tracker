@@ -23,6 +23,14 @@ router.get('/bus/:stopId', function(request, response) {
   });
 });
 
+router.get('/bus/follow/:vehicleId', function (request, response) {
+  var vehicleId = request.params.vehicleId;
+  
+  followBusPredictions(vehicleId, function (predictions) {
+    response.send(predictions['bustime-response']);
+  })
+});
+
 router.get('/train/:mapId', function(request, response) {
   var mapId = request.params.mapId;
   var predictions = {
@@ -79,7 +87,6 @@ router.get('/train/:mapId', function(request, response) {
   });
 });
 
-
 function getRouteStops(route, direction, callback) {
   var routeStopsQuery = 'http://ctabustracker.com/bustime/api/v2/getstops?key='+ctaBusKey+
     '&rt='+route+'&dir='+direction+'&format=json';
@@ -100,6 +107,14 @@ function getBusPredictions(stopId, callback) {
   var predictionsQuery = 'http://www.ctabustracker.com/bustime/api/v2/getpredictions?key='+ctaBusKey+
     '&stpid='+stopId+'&format=json';
   httpget(predictionsQuery, function (data) {
+    callback(data);
+  });
+}
+
+function followBusPredictions(vehicleId, callback) {
+  var followBusQuery = 'http://www.ctabustracker.com/bustime/api/v2/getpredictions?key='+ctaBusKey+
+    '&vid='+vehicleId+'&format=json';
+  httpget(followBusQuery, function (data) {
     callback(data);
   });
 }
