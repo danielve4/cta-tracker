@@ -1,7 +1,8 @@
 $.noConflict();
 jQuery(function($) {
   $(document).ready(function() {
-    var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops',ARRIVALS='arrivals';
+    var FAV='fav',ROUTES='routes',DIRECT='directions',STOPS='stops',
+      ARRIVALS='arrivals', FOLLOW='follow';
     var storageItem = 'favorites'; //Name of item in localStorage
     var favorites = [];
     var trainLines;
@@ -37,12 +38,8 @@ jQuery(function($) {
           listTrainLines();
           listRoutes();
         } else if(context.hasOwnProperty('rt')) {
-          if(!context.hasOwnProperty('dir')) {
-            setScreenTo(DIRECT);
-            listRouteDirections(context.rt);
-          }
-          else if(context.hasOwnProperty('dir') &&
-                  !context.hasOwnProperty('stop-id')) {
+          if(context.hasOwnProperty('dir') &&
+            !context.hasOwnProperty('stop-id')) {
             setScreenTo(STOPS);
             getRouteStops(context.rt,context['dir']);
           }
@@ -50,8 +47,18 @@ jQuery(function($) {
                   context.hasOwnProperty('dir') &&
                   context.hasOwnProperty('stop-id')) {
             setScreenTo(ARRIVALS);
-            getBusPredictions(context['rt-name'].replace(/%20/g, ' '),context['dir'],context['stop-id']);
+            getBusPredictions(context['rt'],context['rt-name'].replace(/%20/g, ' '),context['dir'],context['stop-id']);
             checkFavorite();
+          }
+          else if(context.hasOwnProperty('vid') &&
+                  context.hasOwnProperty('stop-id') &&
+                  context.hasOwnProperty('dir')) {
+            setScreenTo(FOLLOW);
+            getFollowBusPredictions(context['rt'], context['vid'], context['stop-id'], context['dir'])
+          }
+          else {
+            setScreenTo(DIRECT);
+            listRouteDirections(context.rt);
           }
         } else if(context.hasOwnProperty('tl')) {
           if(!context.hasOwnProperty('dir')) {
@@ -192,14 +199,14 @@ jQuery(function($) {
       });
     }
 
-    function getBusPredictions(routeName, direction, stopId) {
+    function getBusPredictions(routeNumber, routeName, direction, stopId) {
       $('#arrivals').empty();
       $('#arrivals').append('<li class="list-subheader">'+routeName+' - '+ direction+'</li>');
       $.when($.ajax({
         type: 'GET',
         url: '/cta/bus/'+stopId
       })).then(function(data) {
-        listPredictions(data);
+        listPredictions(data, routeNumber);
       }, function () {
         console.log('Error');
       });
@@ -215,12 +222,14 @@ jQuery(function($) {
             count++;
             $('#arrivals').append(
               '<li class="prediction">' +
+                '<a href="#favorites">'+
                 '<span class="line-color ' + predictions.predictions[i].line.substring(0, 3) + '"></span>' +
                 '<span class="destination">To ' + predictions.predictions[i].destination + '</span>' +
                 '<span class="arrival-time">' + predictions.predictions[i].eta + 'm</span>' +
                 ((predictions.predictions[i].isDly === '1') ? '<span class="delayed">Delayed</span>':'') +
                 ((predictions.predictions[i].isSch === '1') ? '<span class="scheduled">Scheduled</span>':'') +
                 '<span class="arrival-clock">'+ addMinutesAMPM(currentDate, futureDate, predictions.predictions[i].eta)+'</span>'+
+                '</a>'+
               '</li>'
             );
           }
@@ -235,32 +244,89 @@ jQuery(function($) {
       }
     }
 
-    function listPredictions(predictions) {
+    function listPredictions(predictions, routeNumber) {
       console.log(predictions);
       if(predictions.hasOwnProperty('prd')) {
         var currentDate = new Date();
         var futureDate = new Date();
         var arrivalMinutes;
         var arrivalClock;
+        var aPredicition;
         for(var n=0;n<predictions.prd.length;n++) {
-          if(isNaN(predictions.prd[n].prdctdn)) {
+          aPredicition = predictions.prd[n];
+          if(isNaN(aPredicition.prdctdn)) {
            arrivalMinutes = '';
            arrivalClock = '';
           } else {
             arrivalMinutes = 'm';
-            arrivalClock = '<span class="arrival-clock">'+addMinutesAMPM(currentDate,futureDate,predictions.prd[n].prdctdn)+'</span>';
+            arrivalClock = '<span class="arrival-clock">'+addMinutesAMPM(currentDate,futureDate,aPredicition.prdctdn)+'</span>';
           }
           $('#arrivals').append(
-            '<li class="prediction">'+
-              '<span class="route-number">'+predictions.prd[n].rt+'</span>'+
-              '<span class="destination">To '+predictions.prd[n].des+'</span>'+
-              '<span class="arrival-time">'+predictions.prd[n].prdctdn+arrivalMinutes+'</span>'+
-              arrivalClock +
+            '<li class="prediction">' +
+              '<a href="#rt='+routeNumber+'#vid='+aPredicition.vid+'#stop-id='+aPredicition.stpid+'#dir='+aPredicition.rtdir+'">'+
+                '<span class="route-number">'+aPredicition.rt+'</span>'+
+                '<span class="destination">To '+aPredicition.des+'</span>'+
+                '<span class="arrival-time">'+aPredicition.prdctdn+arrivalMinutes+'</span>'+
+                arrivalClock +
+              '</a>' +
             '</li>'
           );
         }
       } else if(predictions.hasOwnProperty('error')) {
         $('#arrivals').append(
+          '<li class="prediction">'+predictions.error[0].msg+'</li>'
+        );
+      }
+    }
+
+    function getFollowBusPredictions(routeNumber, vehicleId, stopId, direction) {
+      $('#follow').empty();
+      $('#follow').append('<li class="list-subheader">Bus #'+vehicleId+' - '+routeNumber+' - '+ direction+'</li>');
+      $.when($.ajax({
+        type: 'GET',
+        url: '/cta/bus/follow/'+vehicleId
+      })).then(function(data) {
+        listFollowBus(data, stopId);
+      }, function () {
+        console.log('Error');
+      });
+    }
+
+    function listFollowBus(predictions, stopId) {
+      console.log(predictions);
+      if(predictions.hasOwnProperty('prd')) {
+        var currentDate = new Date();
+        var futureDate = new Date();
+        var arrivalMinutes;
+        var arrivalClock;
+        var aPredicition;
+        var followStop;
+        for(var n=0;n<predictions.prd.length;n++) {
+          aPredicition = predictions.prd[n];
+          if(isNaN(aPredicition.prdctdn)) {
+            arrivalMinutes = '';
+            arrivalClock = '';
+          } else {
+            arrivalMinutes = 'm';
+            arrivalClock = '<span class="arrival-clock">'+addMinutesAMPM(currentDate,futureDate,aPredicition.prdctdn)+'</span>';
+          }
+          if(aPredicition.stpid == stopId) {
+            followStop = ' follow-stop';
+          } else {
+            followStop ='';
+          }
+          $('#follow').append(
+            '<li class="prediction'+followStop+'">' +
+              '<a href="#rt='+aPredicition.rt+'#rt-name='+aPredicition.stpnm+'#dir='+aPredicition.rtdir+'#stop-id='+aPredicition.stpid+'">'+
+                '<span class="destination">'+aPredicition.stpnm+'</span>'+
+                '<span class="arrival-time">'+aPredicition.prdctdn+arrivalMinutes+'</span>'+
+                arrivalClock +
+              '</a>' +
+            '</li>'
+          );
+        }
+      } else if(predictions.hasOwnProperty('error')) {
+        $('#follow').append(
           '<li class="prediction">'+predictions.error[0].msg+'</li>'
         );
       }
@@ -421,6 +487,7 @@ jQuery(function($) {
       $('#stops').addClass('hidden');
       $('#arrivals').addClass('hidden');
       $('#app-bar-fav').addClass('hidden');
+      $('#follow').addClass('hidden');
       switch(type) {
         case FAV:
           $('#favorites').removeClass('hidden');
@@ -441,6 +508,9 @@ jQuery(function($) {
         case ARRIVALS:
           $('#arrivals').removeClass('hidden');
           $('#app-bar-fav').removeClass('hidden');
+          break;
+        case FOLLOW:
+          $('#follow').removeClass('hidden');
           break;
         default:
           console.log('Invalid Screen Type');
