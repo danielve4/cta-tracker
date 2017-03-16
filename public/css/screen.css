@@ -112,7 +112,8 @@ nav {
 #routes,
 #route-directions,
 #stops,
-#arrivals {
+#arrivals,
+#follow {
   margin-top: 5.7777777778em; /*104px/18px = 5.7777777778em*/
 }
 
@@ -139,9 +140,22 @@ nav {
   text-overflow: ellipsis;
 }
 
-#arrivals .prediction {
+#arrivals .prediction a,
+#follow .prediction a {
   padding-bottom: 1.38888889em; /*25px*/
   padding-top: 1.38888889em; /*25px*/
+}
+
+#follow .destination {
+  width: 75%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.follow-stop a {
+  color: #f50057;
 }
 
 .list-subheader {
